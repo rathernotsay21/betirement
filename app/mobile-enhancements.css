@@ -1,0 +1,300 @@
+/**
+ * Mobile-Specific Enhancements
+ * Additional CSS for improved mobile experience
+ */
+
+/* Prevent text size adjustment on orientation change in iOS */
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Smooth scrolling for mobile */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Improve tap highlight color */
+* {
+  -webkit-tap-highlight-color: rgba(247, 147, 26, 0.2); /* Bitcoin orange with transparency */
+}
+
+/* Remove default iOS input styling */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="password"],
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem; /* Match Tailwind rounded-md */
+}
+
+/* Ensure minimum font size on iOS to prevent zoom */
+input,
+textarea,
+select {
+  font-size: 16px !important; /* iOS won't zoom if font-size is 16px or larger */
+}
+
+/* Better touch scrolling on iOS */
+.overflow-y-auto,
+.overflow-x-auto,
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent pull-to-refresh on mobile when scrolling */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Mobile-friendly focus states */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch devices */
+  button:focus,
+  a:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: 2px solid #F7931A; /* Bitcoin orange */
+    outline-offset: 2px;
+  }
+}
+
+/* Improve button active states on mobile */
+@media (hover: none) and (pointer: coarse) {
+  button:active,
+  a:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Ensure adequate spacing between interactive elements on mobile */
+@media (max-width: 767px) {
+  button + button,
+  a + a {
+    margin-left: 0.75rem;
+  }
+  
+  /* Stack buttons vertically on very small screens */
+  .button-group-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .button-group-mobile button,
+  .button-group-mobile a {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Improve video player on mobile */
+@media (max-width: 767px) {
+  iframe[src*="youtube"],
+  iframe[src*="vimeo"] {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Better modal experience on mobile */
+@media (max-width: 767px) {
+  [role="dialog"] {
+    max-height: 100vh;
+    max-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+}
+
+/* Improve table responsiveness */
+@media (max-width: 767px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Better card layouts on mobile */
+@media (max-width: 767px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Improve navigation drawer on mobile */
+@media (max-width: 767px) {
+  .mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 320px;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 50;
+  }
+  
+  .mobile-drawer.open {
+    transform: translateX(0);
+  }
+}
+
+/* Improve form layouts on mobile */
+@media (max-width: 767px) {
+  form .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  form label {
+    font-size: 0.875rem;
+  }
+}
+
+/* Better spacing for mobile content */
+@media (max-width: 767px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Improve image loading on mobile */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better typography for mobile */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem;
+  }
+  
+  p {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem;
+  }
+}
+
+/* Improve sticky header on mobile */
+@media (max-width: 767px) {
+  header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+  }
+  
+  /* Add padding to body to account for fixed header */
+  body.has-sticky-header {
+    padding-top: 64px; /* Height of mobile header */
+  }
+}
+
+/* Better loading states on mobile */
+@media (max-width: 767px) {
+  .skeleton {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+/* Improve accessibility on mobile */
+@media (max-width: 767px) {
+  /* Ensure skip links are visible when focused */
+  .skip-link:focus {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #F7931A;
+    color: white;
+    padding: 1rem;
+    z-index: 9999;
+    text-decoration: none;
+  }
+}
+
+/* Better print styles for mobile */
+@media print {
+  header,
+  footer,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+}
+
+/* Improve landscape orientation on mobile */
+@media (max-width: 767px) and (orientation: landscape) {
+  .mobile-landscape-adjust {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* Better safe area handling for notched devices */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+  
+  header,
+  footer {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Improve touch feedback */
+@media (hover: none) and (pointer: coarse) {
+  .touch-feedback:active {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}

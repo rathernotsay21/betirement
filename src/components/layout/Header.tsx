@@ -1,0 +1,284 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { mainNavigation } from '@/src/config/navigation';
+import { Button } from '@/src/components/ui';
+import { BitcoinPriceTickerCompact } from '@/src/components/ui/BitcoinPriceTicker';
+
+export function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-black/95 shadow-lg backdrop-blur-md'
+          : 'bg-black/80 backdrop-blur-sm'
+      }`}
+    >
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+        <div className="flex items-center justify-between h-16 lg:h-20">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="text-2xl font-heading font-bold text-bitcoin-500 hover:text-bitcoin-400 transition-colors">
+                Betirement
+              </span>
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-8">
+            {/* Bitcoin Price Ticker */}
+            <div className="mr-4">
+              <BitcoinPriceTickerCompact />
+            </div>
+
+            {mainNavigation.map((item: typeof mainNavigation[0]) => (
+              <div key={item.href} className="relative">
+                {item.children ? (
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setOpenDropdown(item.label)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <button
+                      className="text-white/90 hover:text-bitcoin-400 font-medium transition-colors duration-200 flex items-center space-x-1"
+                      aria-expanded={openDropdown === item.label}
+                      aria-haspopup="true"
+                    >
+                      <span>{item.label}</span>
+                      <svg
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          openDropdown === item.label ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </button>
+                    {openDropdown === item.label && (
+                      <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 border border-neutral-100">
+                        {item.children.map((child: typeof item.children[0]) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="block px-4 py-2 text-neutral-900 hover:bg-bitcoin-50 hover:text-bitcoin-500 transition-colors duration-200"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="text-white/90 hover:text-bitcoin-400 font-medium transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden lg:block">
+            <Button variant="primary" href="/start-here">
+              Get Started
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 rounded-md text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-bitcoin-500"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? (
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Drawer */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+
+          {/* Drawer */}
+          <div className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-50 lg:hidden overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-neutral-100">
+              <span className="text-xl font-heading font-bold text-bitcoin-500">
+                Betirement
+              </span>
+              <button
+                onClick={closeMobileMenu}
+                className="p-2 rounded-md text-neutral-900 hover:bg-neutral-100"
+                aria-label="Close mobile menu"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <nav className="p-4 space-y-2">
+              {mainNavigation.map((item: typeof mainNavigation[0]) => (
+                <div key={item.href}>
+                  {item.children ? (
+                    <div>
+                      <button
+                        className="w-full flex items-center justify-between px-4 py-3 text-left text-neutral-900 hover:bg-neutral-50 rounded-lg font-medium"
+                        onClick={() =>
+                          setOpenDropdown(
+                            openDropdown === item.label ? null : item.label
+                          )
+                        }
+                        aria-expanded={openDropdown === item.label}
+                      >
+                        <span>{item.label}</span>
+                        <svg
+                          className={`w-5 h-5 transition-transform duration-200 ${
+                            openDropdown === item.label ? 'rotate-180' : ''
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </button>
+                      {openDropdown === item.label && (
+                        <div className="ml-4 mt-2 space-y-1">
+                          {item.children.map((child: typeof item.children[0]) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className="block px-4 py-2 text-neutral-900 hover:bg-neutral-50 rounded-lg"
+                              onClick={closeMobileMenu}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="block px-4 py-3 text-neutral-900 hover:bg-neutral-50 rounded-lg font-medium"
+                      onClick={closeMobileMenu}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
+              ))}
+
+              <div className="pt-4">
+                <Button
+                  variant="primary"
+                  href="/start-here"
+                  className="w-full justify-center"
+                  onClick={closeMobileMenu}
+                >
+                  Get Started
+                </Button>
+              </div>
+            </nav>
+          </div>
+        </>
+      )}
+    </header>
+  );
+}

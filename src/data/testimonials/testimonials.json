@@ -1,0 +1,20 @@
+[
+  {
+    "id": "testimonial-1",
+    "name": "John D.",
+    "role": "Early Retiree",
+    "avatar": "/images/testimonials/avatar-1.jpg",
+    "content": "Michael's strategies helped me retire 5 years earlier than planned. His practical approach to Bitcoin investing made all the difference.",
+    "rating": 5,
+    "featured": true
+  },
+  {
+    "id": "testimonial-2",
+    "name": "Sarah M.",
+    "role": "Financial Planner",
+    "avatar": "/images/testimonials/avatar-2.jpg",
+    "content": "The content on Betirement is both educational and actionable. I recommend it to all my clients interested in cryptocurrency.",
+    "rating": 5,
+    "featured": true
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "bitcoin",
+    "term": "Bitcoin",
+    "definition": "A decentralized digital currency that operates without a central bank or single administrator. It can be sent from user to user on the peer-to-peer bitcoin network without intermediaries.",
+    "category": "Cryptocurrency"
+  },
+  {
+    "id": "blockchain",
+    "term": "Blockchain",
+    "definition": "A distributed ledger technology that records transactions across multiple computers in a way that makes it difficult to alter retroactively. Bitcoin uses blockchain technology.",
+    "category": "Technology"
+  },
+  {
+    "id": "hodl",
+    "term": "HODL",
+    "definition": "A term derived from a misspelling of 'hold' that has become a popular strategy in cryptocurrency investing, meaning to hold onto your Bitcoin rather than selling during market volatility.",
+    "category": "Strategy"
+  },
+  {
+    "id": "satoshi",
+    "term": "Satoshi",
+    "definition": "The smallest unit of Bitcoin, equal to 0.00000001 BTC. Named after Bitcoin's creator, Satoshi Nakamoto.",
+    "category": "Cryptocurrency"
+  },
+  {
+    "id": "private-key",
+    "term": "Private Key",
+    "definition": "A secret alphanumeric code that allows you to access and manage your Bitcoin. It should never be shared with anyone.",
+    "category": "Security"
+  },
+  {
+    "id": "wallet",
+    "term": "Wallet",
+    "definition": "A digital tool (software or hardware) that stores your private keys and allows you to send, receive, and manage your Bitcoin.",
+    "category": "Technology"
+  },
+  {
+    "id": "cold-storage",
+    "term": "Cold Storage",
+    "definition": "Keeping Bitcoin in an offline wallet that is not connected to the internet, providing enhanced security against hacking.",
+    "category": "Security"
+  },
+  {
+    "id": "hot-wallet",
+    "term": "Hot Wallet",
+    "definition": "A Bitcoin wallet that is connected to the internet, making it convenient for transactions but potentially less secure than cold storage.",
+    "category": "Security"
+  },
+  {
+    "id": "mining",
+    "term": "Mining",
+    "definition": "The process of validating Bitcoin transactions and adding them to the blockchain. Miners are rewarded with newly created Bitcoin.",
+    "category": "Technology"
+  },
+  {
+    "id": "halving",
+    "term": "Halving",
+    "definition": "An event that occurs approximately every four years where the reward for mining new Bitcoin blocks is cut in half, reducing the rate of new Bitcoin creation.",
+    "category": "Economics"
+  },
+  {
+    "id": "market-cap",
+    "term": "Market Capitalization",
+    "definition": "The total value of all Bitcoin in circulation, calculated by multiplying the current price by the total supply.",
+    "category": "Economics"
+  },
+  {
+    "id": "volatility",
+    "term": "Volatility",
+    "definition": "The degree of variation in Bitcoin's price over time. Bitcoin is known for high volatility compared to traditional assets.",
+    "category": "Investment"
+  },
+  {
+    "id": "dca",
+    "term": "Dollar-Cost Averaging (DCA)",
+    "definition": "An investment strategy where you invest a fixed amount of money at regular intervals, regardless of the asset's price, to reduce the impact of volatility.",
+    "category": "Strategy"
+  },
+  {
+    "id": "fiat",
+    "term": "Fiat Currency",
+    "definition": "Government-issued currency that is not backed by a physical commodity like gold, such as the US Dollar or Euro.",
+    "category": "Economics"
+  },
+  {
+    "id": "exchange",
+    "term": "Exchange",
+    "definition": "A platform where you can buy, sell, and trade Bitcoin and other cryptocurrencies for fiat currency or other digital assets.",
+    "category": "Technology"
+  },
+  {
+    "id": "kyc",
+    "term": "KYC (Know Your Customer)",
+    "definition": "Identity verification processes required by regulated exchanges to comply with anti-money laundering regulations.",
+    "category": "Regulation"
+  },
+  {
+    "id": "seed-phrase",
+    "term": "Seed Phrase",
+    "definition": "A series of 12-24 words that can be used to recover your Bitcoin wallet. It should be stored securely and never shared.",
+    "category": "Security"
+  },
+  {
+    "id": "bull-market",
+    "term": "Bull Market",
+    "definition": "A market condition characterized by rising prices and optimistic investor sentiment.",
+    "category": "Investment"
+  },
+  {
+    "id": "bear-market",
+    "term": "Bear Market",
+    "definition": "A market condition characterized by falling prices and pessimistic investor sentiment.",
+    "category": "Investment"
+  },
+  {
+    "id": "altcoin",
+    "term": "Altcoin",
+    "definition": "Any cryptocurrency other than Bitcoin. Short for 'alternative coin.'",
+    "category": "Cryptocurrency"
+  },
+  {
+    "id": "fire",
+    "term": "FIRE (Financial Independence, Retire Early)",
+    "definition": "A movement focused on aggressive saving and investing to achieve financial independence and early retirement.",
+    "category": "Retirement"
+  },
+  {
+    "id": "safe-withdrawal-rate",
+    "term": "Safe Withdrawal Rate",
+    "definition": "The percentage of your retirement portfolio you can withdraw annually without running out of money. The traditional rule is 4%.",
+    "category": "Retirement"
+  },
+  {
+    "id": "diversification",
+    "term": "Diversification",
+    "definition": "An investment strategy that spreads your money across different assets to reduce risk.",
+    "category": "Investment"
+  },
+  {
+    "id": "asset-allocation",
+    "term": "Asset Allocation",
+    "definition": "The process of dividing your investment portfolio among different asset categories, such as stocks, bonds, and Bitcoin.",
+    "category": "Investment"
+  },
+  {
+    "id": "compound-interest",
+    "term": "Compound Interest",
+    "definition": "Interest calculated on the initial principal and accumulated interest from previous periods, leading to exponential growth over time.",
+    "category": "Investment"
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "questions": [
+    {
+      "id": "experience",
+      "question": "What's your current experience with Bitcoin?",
+      "options": [
+        "Complete beginner - I've only heard about it",
+        "Curious learner - I understand the basics",
+        "Active investor - I own some Bitcoin",
+        "Experienced holder - Bitcoin is part of my strategy"
+      ],
+      "type": "single"
+    },
+    {
+      "id": "goal",
+      "question": "What's your primary retirement goal?",
+      "options": [
+        "Learn about Bitcoin for retirement planning",
+        "Build a Bitcoin retirement strategy",
+        "Optimize my existing Bitcoin holdings",
+        "Achieve early retirement with Bitcoin"
+      ],
+      "type": "single"
+    },
+    {
+      "id": "timeline",
+      "question": "When are you planning to retire?",
+      "options": [
+        "Already retired or within 1 year",
+        "1-5 years away",
+        "5-10 years away",
+        "10+ years away"
+      ],
+      "type": "single"
+    },
+    {
+      "id": "concerns",
+      "question": "What concerns you most about Bitcoin retirement? (Select all that apply)",
+      "options": [
+        "Market volatility and price swings",
+        "Security and safe storage",
+        "Tax implications and regulations",
+        "Knowing when to buy or sell",
+        "Integrating Bitcoin with traditional retirement"
+      ],
+      "type": "multiple"
+    },
+    {
+      "id": "learning",
+      "question": "How do you prefer to learn?",
+      "options": [
+        "Video tutorials and walkthroughs",
+        "Written guides and articles",
+        "Interactive tools and calculators",
+        "Community discussions and Q&A"
+      ],
+      "type": "single"
+    }
+  ],
+  "learningPaths": {
+    "beginner": {
+      "title": "Bitcoin Basics Path",
+      "description": "Start with the fundamentals and build a strong foundation",
+      "resources": [
+        "Watch: Bitcoin 101 video series",
+        "Read: What is Bitcoin? beginner guide",
+        "Use: Bitcoin allocation calculator",
+        "Join: Beginner community forum"
+      ],
+      "nextSteps": [
+        "Complete the Bitcoin Fundamentals course",
+        "Set up your first secure wallet",
+        "Start with a small Bitcoin purchase"
+      ]
+    },
+    "intermediate": {
+      "title": "Strategy Builder Path",
+      "description": "Develop your personalized Bitcoin retirement strategy",
+      "resources": [
+        "Watch: Retirement planning with Bitcoin",
+        "Read: Building your Bitcoin strategy guide",
+        "Use: Retirement calculator with Bitcoin",
+        "Download: Bitcoin retirement planning template"
+      ],
+      "nextSteps": [
+        "Calculate your Bitcoin retirement number",
+        "Create your dollar-cost averaging plan",
+        "Review tax-efficient strategies"
+      ]
+    },
+    "advanced": {
+      "title": "Optimization Path",
+      "description": "Refine your strategy and maximize your Bitcoin holdings",
+      "resources": [
+        "Watch: Advanced Bitcoin strategies",
+        "Read: Tax optimization for Bitcoin holders",
+        "Use: Portfolio rebalancing calculator",
+        "Join: Advanced strategy mastermind"
+      ],
+      "nextSteps": [
+        "Optimize your Bitcoin allocation",
+        "Implement tax-loss harvesting",
+        "Explore Bitcoin lending options"
+      ]
+    },
+    "ready": {
+      "title": "Early Retirement Path",
+      "description": "Execute your plan and achieve financial freedom",
+      "resources": [
+        "Watch: Living on Bitcoin in retirement",
+        "Read: Withdrawal strategies guide",
+        "Use: Bitcoin income calculator",
+        "Join: Early retiree community"
+      ],
+      "nextSteps": [
+        "Create your Bitcoin withdrawal strategy",
+        "Set up automated income streams",
+        "Connect with other early retirees"
+      ]
+    }
+  },
+  "quickWins": [
+    {
+      "id": "calculator",
+      "title": "Calculate Your Bitcoin Retirement Number",
+      "description": "Use our free calculator to see how much Bitcoin you need",
+      "action": "Try Calculator",
+      "link": "/content/resources"
+    },
+    {
+      "id": "guide",
+      "title": "Download the Bitcoin Retirement Starter Guide",
+      "description": "Get our comprehensive PDF guide (free with email)",
+      "action": "Get Guide",
+      "link": "/content/resources"
+    },
+    {
+      "id": "video",
+      "title": "Watch: My Bitcoin Retirement Story",
+      "description": "Learn how I retired at 51 using Bitcoin strategies",
+      "action": "Watch Now",
+      "link": "/about"
+    },
+    {
+      "id": "newsletter",
+      "title": "Join 10,000+ Bitcoin Retirement Enthusiasts",
+      "description": "Get weekly insights and strategies in your inbox",
+      "action": "Subscribe",
+      "link": "#email-course"
+    }
+  ]
+}

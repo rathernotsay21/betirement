@@ -1,0 +1,14 @@
+export { HeroSection } from './HeroSection';
+export { AnimatedHeroSection } from './AnimatedHeroSection';
+export { SocialProofBar } from './SocialProofBar';
+export { ValuePropositionGrid } from './ValuePropositionGrid';
+export { FeaturedContent } from './FeaturedContent';
+export { EnhancedFeaturedContent } from './EnhancedFeaturedContent';
+export { ExitIntentPopup } from './ExitIntentPopup';
+export { InteractiveTimeline } from './InteractiveTimeline';
+export { VideoIntroduction } from './VideoIntroduction';
+export { CredibilitySection } from './CredibilitySection';
+export { MediaKitSection } from './MediaKitSection';
+export { PastAppearancesSection } from './PastAppearancesSection';
+export { SpeakingTopicsSection } from './SpeakingTopicsSection';
+export { SpeakingTestimonialsSection } from './SpeakingTestimonialsSection';

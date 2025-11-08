@@ -1,0 +1,27 @@
+name: Netlify Deploy Status
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy-info:
+    name: Deployment Information
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deployment notification
+        run: |
+          echo "🚀 Netlify will automatically deploy this commit"
+          echo "📦 Branch: ${{ github.ref_name }}"
+          echo "💡 Commit: ${{ github.sha }}"
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "🔍 This is a preview deployment for PR #${{ github.event.pull_request.number }}"
+            echo "Preview URL will be available in the Netlify bot comment below"
+          else
+            echo "🌐 Production deployment to: https://betirement.com"
+          fi

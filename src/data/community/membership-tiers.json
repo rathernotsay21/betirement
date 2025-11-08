@@ -1,0 +1,55 @@
+{
+  "tiers": [
+    {
+      "id": "free",
+      "name": "Free Member",
+      "price": "Free",
+      "description": "Start your Bitcoin retirement journey with essential resources and community access.",
+      "features": [
+        "Weekly newsletter with Bitcoin retirement insights",
+        "Access to public community discussions",
+        "Free downloadable guides and checklists",
+        "Video library access",
+        "Blog articles and resources"
+      ],
+      "cta": "Join Free",
+      "highlighted": false
+    },
+    {
+      "id": "premium",
+      "name": "Premium Member",
+      "price": "$47/month",
+      "description": "Accelerate your journey with exclusive content, advanced tools, and priority support.",
+      "features": [
+        "Everything in Free, plus:",
+        "Exclusive premium video content",
+        "Advanced calculators and planning tools",
+        "Monthly live Q&A sessions",
+        "Private member forum access",
+        "Downloadable course materials",
+        "Priority email support",
+        "Member-only webinars"
+      ],
+      "cta": "Upgrade to Premium",
+      "highlighted": true
+    },
+    {
+      "id": "vip",
+      "name": "VIP Member",
+      "price": "$297/month",
+      "description": "Get personalized guidance and direct access to Michael for your Bitcoin retirement strategy.",
+      "features": [
+        "Everything in Premium, plus:",
+        "Monthly 1-on-1 strategy call with Michael",
+        "Personalized Bitcoin retirement roadmap",
+        "Direct messaging access to Michael",
+        "VIP-only mastermind group",
+        "Early access to new products and content",
+        "Annual portfolio review session",
+        "Lifetime access to all digital products"
+      ],
+      "cta": "Join VIP",
+      "highlighted": false
+    }
+  ]
+}
