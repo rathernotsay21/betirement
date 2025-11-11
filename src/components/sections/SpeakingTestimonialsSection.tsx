@@ -23,7 +23,7 @@ const speakingTestimonials = [
     id: 3,
     name: 'Sarah Thompson',
     role: 'Conference Director',
-    organization: 'Crypto Investing Conference',
+    organization: 'Bitcoin Strategy Conference',
     content: 'Professional, prepared, and engaging. Michael delivered exactly what we needed—actionable insights backed by personal experience. He was easy to work with and our attendees gave him the highest ratings.',
     rating: 5,
     image: '/images/testimonials/director-1.jpg',

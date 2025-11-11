@@ -7,6 +7,7 @@ import { Modal } from '@/components/ui/Modal';
 import { cn } from '@/lib/utils';
 import { ConvertKitTag } from '@/lib/convertkit';
 import { trackEmailSignup, trackFormSubmit } from '@/src/lib/analytics';
+import { Check, X } from 'lucide-react';
 
 export interface EmailCaptureFormProps {
   variant?: 'inline' | 'modal' | 'slide-in';
@@ -165,8 +166,9 @@ export function EmailCaptureForm({
       )}
 
       {success && (
-        <div className="text-sm text-success font-medium" role="status">
-          ✓ Successfully subscribed! Check your email for confirmation.
+        <div className="text-sm text-success font-medium flex items-center gap-2" role="status">
+          <Check className="w-4 h-4" />
+          Successfully subscribed! Check your email for confirmation.
         </div>
       )}
 
@@ -242,17 +244,7 @@ export function EmailCaptureSlideIn({
           className="absolute top-2 right-2 sm:top-4 sm:right-4 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
           aria-label="Close"
         >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <X className="w-5 h-5" />
         </button>
 
         <EmailCaptureForm

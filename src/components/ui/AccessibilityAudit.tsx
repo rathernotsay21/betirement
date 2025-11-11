@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { colorContrast, validateColorContrast } from '@/src/lib/accessibility';
+import { CheckCircle } from 'lucide-react';
 
 /**
  * Accessibility Audit Component
@@ -148,8 +149,9 @@ export function AccessibilityAudit() {
                 Issues Found: {issues.length}
               </h4>
               {issues.length === 0 ? (
-                <p className="text-xs text-green-600">
-                  ✓ No accessibility issues detected!
+                <p className="text-xs text-green-600 flex items-center gap-1">
+                  <CheckCircle className="w-4 h-4" />
+                  No accessibility issues detected!
                 </p>
               ) : (
                 <ul className="space-y-1 text-xs">

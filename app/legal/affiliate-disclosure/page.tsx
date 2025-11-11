@@ -45,7 +45,7 @@ export default function AffiliateDisclosurePage() {
               of products and services:
             </p>
             <ul className="list-disc pl-6 mb-4 text-neutral-700 space-y-2">
-              <li>Cryptocurrency exchanges and platforms</li>
+              <li>Bitcoin exchanges and platforms</li>
               <li>Hardware wallets and security devices</li>
               <li>Books and educational resources</li>
               <li>Financial tools and software</li>
@@ -54,7 +54,7 @@ export default function AffiliateDisclosurePage() {
               <li>Investment platforms and services</li>
             </ul>
             <p className="text-neutral-700">
-              We may participate in affiliate programs including but not limited to Amazon Associates, cryptocurrency 
+              We may participate in affiliate programs including but not limited to Amazon Associates, bitcoin 
               exchange affiliate programs, and other relevant affiliate networks.
             </p>
           </section>
@@ -166,15 +166,15 @@ export default function AffiliateDisclosurePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4 text-black">10. Cryptocurrency Exchange Affiliates</h2>
+            <h2 className="text-2xl font-bold mb-4 text-black">10. Bitcoin Exchange Affiliates</h2>
             <p className="text-neutral-700 mb-4">
-              We may have affiliate relationships with cryptocurrency exchanges and platforms. When you sign up for an 
-              exchange or platform through our link, we may receive a commission based on your trading activity or account 
+              We may have affiliate relationships with bitcoin exchanges and platforms. When you sign up for an
+              exchange or platform through our link, we may receive a commission based on your trading activity or account
               creation.
             </p>
             <p className="text-neutral-700">
-              We only recommend exchanges and platforms that we have personally used and believe to be reputable. However, 
-              you should always conduct your own research and understand the risks before using any cryptocurrency platform.
+              We only recommend exchanges and platforms that we have personally used and believe to be reputable. However,
+              you should always conduct your own research and understand the risks before using any bitcoin platform.
             </p>
           </section>
 

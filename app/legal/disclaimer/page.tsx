@@ -37,7 +37,7 @@ export default function DisclaimerPage() {
               shared on this website represents personal experiences, opinions, and educational content only.
             </p>
             <p className="text-neutral-700">
-              Before making any financial decisions, including but not limited to investing in Bitcoin or other cryptocurrencies, 
+              Before making any financial decisions, including but not limited to investing in Bitcoin, 
               retirement planning, or asset allocation, you should consult with qualified financial, legal, and tax professionals 
               who understand your specific situation.
             </p>
@@ -52,21 +52,21 @@ export default function DisclaimerPage() {
               future results. The value of investments can go up or down, and you may lose money.
             </p>
 
-            <h3 className="text-xl font-semibold mb-3 text-black">2.2 Cryptocurrency Risks</h3>
+            <h3 className="text-xl font-semibold mb-3 text-black">2.2 Bitcoin Risks</h3>
             <p className="text-neutral-700 mb-4">
-              Bitcoin and other cryptocurrencies are highly volatile and speculative investments. The cryptocurrency market 
+              Bitcoin is a highly volatile and speculative investment. The bitcoin market
               is subject to significant price fluctuations, regulatory changes, technological risks, and other uncertainties.
             </p>
             <p className="text-neutral-700 mb-4">
-              Cryptocurrency investments may result in substantial or complete loss of your investment. Consider the following risks:
+              Bitcoin investments may result in substantial or complete loss of your investment. Consider the following risks:
             </p>
             <ul className="list-disc pl-6 mb-4 text-neutral-700 space-y-2">
-              <li><strong>Volatility:</strong> Cryptocurrency prices can fluctuate dramatically in short periods</li>
-              <li><strong>Regulatory Risk:</strong> Government regulations may change and impact cryptocurrency values</li>
-              <li><strong>Security Risk:</strong> Digital assets can be lost or stolen through hacking or user error</li>
-              <li><strong>Liquidity Risk:</strong> You may not be able to sell your cryptocurrency when desired</li>
-              <li><strong>Technology Risk:</strong> Blockchain technology is still evolving and may have unforeseen issues</li>
-              <li><strong>Market Risk:</strong> Cryptocurrency markets operate 24/7 with limited oversight</li>
+              <li><strong>Volatility:</strong> Bitcoin price can fluctuate dramatically in short periods</li>
+              <li><strong>Regulatory Risk:</strong> Government regulations may change and impact bitcoin value</li>
+              <li><strong>Security Risk:</strong> Bitcoin can be lost or stolen through hacking or user error</li>
+              <li><strong>Liquidity Risk:</strong> You may not be able to sell your bitcoin when desired</li>
+              <li><strong>Technology Risk:</strong> Bitcoin technology continues to evolve and may have unforeseen issues</li>
+              <li><strong>Market Risk:</strong> Bitcoin markets operate 24/7 with limited oversight</li>
             </ul>
 
             <h3 className="text-xl font-semibold mb-3 text-black">2.3 Retirement Planning Risks</h3>
@@ -132,7 +132,7 @@ export default function DisclaimerPage() {
           <section>
             <h2 className="text-2xl font-bold mb-4 text-black">7. Tax Implications</h2>
             <p className="text-neutral-700 mb-4">
-              We are not tax professionals. The tax implications of cryptocurrency investments, retirement planning, and 
+              We are not tax professionals. The tax implications of bitcoin investments, retirement planning, and 
               other financial strategies can be complex and vary based on your jurisdiction and individual circumstances.
             </p>
             <p className="text-neutral-700">
@@ -148,7 +148,7 @@ export default function DisclaimerPage() {
               comply with all applicable laws and regulations in your jurisdiction.
             </p>
             <p className="text-neutral-700">
-              Cryptocurrency regulations vary by country and region. Some jurisdictions may restrict or prohibit cryptocurrency 
+              Bitcoin regulations vary by country and region. Some jurisdictions may restrict or prohibit bitcoin 
               ownership or trading. It is your responsibility to understand and comply with applicable laws.
             </p>
           </section>

@@ -434,11 +434,20 @@ export default async function VideoPage({ params }: VideoPageProps) {
 export async function generateStaticParams() {
   try {
     const videos = await youtubeClient.getChannelVideos(10);
-    return videos.map((video) => ({
-      id: video.youtubeId,
+    if (videos.length > 0) {
+      return videos.map((video) => ({
+        id: video.youtubeId,
+      }));
+    }
+    // Fallback to mock videos if YouTube API fails or returns no videos
+    return mockVideos.slice(0, 10).map((video) => ({
+      id: video.id,
     }));
   } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
+    console.error("Error generating static params (using mock data):", error);
+    // Fallback to mock videos on error
+    return mockVideos.slice(0, 10).map((video) => ({
+      id: video.id,
+    }));
   }
 }

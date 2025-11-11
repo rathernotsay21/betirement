@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { cn } from "@/lib/utils";
+import { Trophy } from 'lucide-react';
 
 interface QuickWin {
   id: string;
@@ -139,8 +140,9 @@ export function QuickWinsChecklist({ items }: QuickWinsChecklistProps) {
               />
             </svg>
           </div>
-          <h4 className="text-xl font-bold text-black mb-2">
-            Congratulations! 🎉
+          <h4 className="text-xl font-bold text-black mb-2 flex items-center justify-center gap-2">
+            <Trophy className="w-6 h-6 text-bitcoin-500" />
+            Congratulations!
           </h4>
           <p className="text-neutral-700">
             You've completed all the quick wins. Ready to dive deeper?

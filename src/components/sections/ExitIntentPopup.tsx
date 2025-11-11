@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Modal, Button, Input } from '@/src/components/ui';
+import { CheckCircle2 } from 'lucide-react';
 
 export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -94,19 +95,19 @@ export function ExitIntentPopup() {
 
         <div className="pt-4 border-t border-neutral-200">
           <div className="flex items-start gap-3 text-sm text-neutral-600">
-            <span className="text-success text-xl">✓</span>
+            <CheckCircle2 className="text-success w-5 h-5 flex-shrink-0 mt-0.5" />
             <div>
               <strong>Instant access</strong> - Download immediately after subscribing
             </div>
           </div>
           <div className="flex items-start gap-3 text-sm text-neutral-600 mt-2">
-            <span className="text-success text-xl">✓</span>
+            <CheckCircle2 className="text-success w-5 h-5 flex-shrink-0 mt-0.5" />
             <div>
               <strong>Weekly insights</strong> - Get exclusive Bitcoin retirement tips
             </div>
           </div>
           <div className="flex items-start gap-3 text-sm text-neutral-600 mt-2">
-            <span className="text-success text-xl">✓</span>
+            <CheckCircle2 className="text-success w-5 h-5 flex-shrink-0 mt-0.5" />
             <div>
               <strong>No spam</strong> - Only valuable content, unsubscribe anytime
             </div>

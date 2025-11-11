@@ -3,20 +3,20 @@
 import dynamic from "next/dynamic";
 import {
   MembershipComparison,
-} from "@/components/community";
-import { Button } from "@/components/ui";
+} from "@/src/components/community";
+import { Button } from "@/src/components/ui";
 import { Users, Heart, TrendingUp, Shield } from "lucide-react";
-import type { MembershipTierInfo } from "@/types/community";
-import membershipTiersData from "@/data/community/membership-tiers.json";
+import type { MembershipTierInfo } from "@/src/types/community";
+import membershipTiersData from "@/src/data/community/membership-tiers.json";
 
 // Dynamic imports for below-fold components
 const ForumPlaceholder = dynamic(
-  () => import("@/components/community").then((mod) => mod.ForumPlaceholder),
+  () => import("@/src/components/community").then((mod) => mod.ForumPlaceholder),
   { ssr: false }
 );
 
 const SuccessStoryForm = dynamic(
-  () => import("@/components/community").then((mod) => mod.SuccessStoryForm),
+  () => import("@/src/components/community").then((mod) => mod.SuccessStoryForm),
   {
     loading: () => (
       <div className="bg-white rounded-lg shadow-lg p-8 text-center">
@@ -28,17 +28,17 @@ const SuccessStoryForm = dynamic(
 );
 
 const InstagramFeed = dynamic(
-  () => import("@/components/social").then((mod) => mod.InstagramFeed),
+  () => import("@/src/components/social").then((mod) => mod.InstagramFeed),
   { ssr: false }
 );
 
 const TwitterTimeline = dynamic(
-  () => import("@/components/social").then((mod) => mod.TwitterTimeline),
+  () => import("@/src/components/social").then((mod) => mod.TwitterTimeline),
   { ssr: false }
 );
 
 const SocialFollowerStats = dynamic(
-  () => import("@/components/social").then((mod) => mod.SocialFollowerStats),
+  () => import("@/src/components/social").then((mod) => mod.SocialFollowerStats),
   { ssr: false }
 );
 
@@ -59,12 +59,12 @@ export default function CommunityPage() {
       <section className="bg-gradient-to-br from-bitcoin-500 to-bitcoin-700 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Join the Betirement Community
+            <h1 className="font-sans text-5xl md:text-6xl font-bold mb-6">
+              Join the <span className="text-bitcoin-500">₿etirement</span> Community
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-bitcoin-50">
-              Connect with thousands of members on their journey to
-              Bitcoin-powered early retirement. Learn, share, and grow together.
+              Connect with engineers and professionals who are building
+              their financial independence with bitcoin. Real people, real experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -100,11 +100,11 @@ export default function CommunityPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-black mb-4">
-              Why Join Our Community?
+              What You'll Find Here
             </h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              More than just a membership - it's a supportive network of
-              like-minded individuals pursuing financial freedom through Bitcoin.
+              A practical community of people who understand both the potential
+              and the risks of bitcoin. No moonboys, just thoughtful discussion.
             </p>
           </div>
 
@@ -114,11 +114,11 @@ export default function CommunityPage() {
                 <Users className="w-8 h-8 text-bitcoin-500" />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">
-                Connect & Learn
+                Real Discussions
               </h3>
               <p className="text-neutral-600">
-                Engage with experienced members, ask questions, and learn from
-                real success stories.
+                Ask questions, share experiences, learn from others who've
+                actually done it.
               </p>
             </div>
 
@@ -127,11 +127,11 @@ export default function CommunityPage() {
                 <TrendingUp className="w-8 h-8 text-success" />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">
-                Exclusive Content
+                Practical Resources
               </h3>
               <p className="text-neutral-600">
-                Access premium videos, tools, and resources not available to the
-                public.
+                Spreadsheets, calculators, and tools I actually use for
+                retirement planning.
               </p>
             </div>
 
@@ -140,11 +140,11 @@ export default function CommunityPage() {
                 <Shield className="w-8 h-8 text-trust" />
               </div>
               <h3 className="text-xl font-bold text-black mb-2">
-                Expert Guidance
+                Direct Access
               </h3>
               <p className="text-neutral-600">
-                Get insights from Michael and other experts who've successfully
-                retired with Bitcoin.
+                Ask me questions directly. I share what worked, what didn't,
+                and what I'd do differently.
               </p>
             </div>
 

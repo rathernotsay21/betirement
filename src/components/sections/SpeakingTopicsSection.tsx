@@ -1,5 +1,7 @@
 'use client';
 
+import { Rocket, Bitcoin, BarChart3, Brain, Coins, LightbulbIcon, Clock, Users, CheckCircle, LucideIcon } from 'lucide-react';
+
 const speakingTopics = [
   {
     id: 1,
@@ -14,14 +16,14 @@ const speakingTopics = [
       'When to take profits and rebalance',
     ],
     audienceLevel: 'All levels',
-    icon: '🚀',
+    icon: Rocket,
   },
   {
     id: 2,
     title: 'Bitcoin 101: Understanding Digital Gold',
     duration: '30-45 minutes',
     format: 'Workshop',
-    description: 'A comprehensive introduction to Bitcoin for those new to cryptocurrency. Demystify the technology, understand the value proposition, and learn how to get started safely.',
+    description: 'A straightforward introduction to Bitcoin for beginners. Clear explanations of what it is, why it matters, and how to get started safely.',
     keyTakeaways: [
       'What Bitcoin is and why it matters',
       'How blockchain technology works (simplified)',
@@ -29,7 +31,7 @@ const speakingTopics = [
       'Common mistakes to avoid',
     ],
     audienceLevel: 'Beginner',
-    icon: '₿',
+    icon: Bitcoin,
   },
   {
     id: 3,
@@ -44,7 +46,7 @@ const speakingTopics = [
       'Tax implications and optimization',
     ],
     audienceLevel: 'Intermediate',
-    icon: '📊',
+    icon: BarChart3,
   },
   {
     id: 4,
@@ -59,22 +61,22 @@ const speakingTopics = [
       'Long-term thinking vs. short-term noise',
     ],
     audienceLevel: 'All levels',
-    icon: '🧠',
+    icon: Brain,
   },
   {
     id: 5,
-    title: 'Financial Independence Through Cryptocurrency',
+    title: 'Financial Independence with Bitcoin',
     duration: '60-90 minutes',
     format: 'Workshop',
-    description: 'A comprehensive workshop on achieving financial independence using cryptocurrency as a wealth-building tool. Includes interactive exercises and personalized planning.',
+    description: 'A hands-on workshop on building financial independence with bitcoin. Based on real experience, not theory. Includes practical exercises and planning tools.',
     keyTakeaways: [
-      'Calculate your FI number with crypto',
+      'Calculate your FI number with bitcoin',
       'Dollar-cost averaging strategies',
       'Security best practices',
       'Creating your personalized roadmap',
     ],
     audienceLevel: 'Intermediate',
-    icon: '💰',
+    icon: Coins,
   },
   {
     id: 6,
@@ -89,7 +91,7 @@ const speakingTopics = [
       'Advice for those starting today',
     ],
     audienceLevel: 'All levels',
-    icon: '💭',
+    icon: LightbulbIcon,
   },
 ];
 
@@ -108,18 +110,20 @@ export function SpeakingTopicsSection() {
           </div>
 
           <div className="space-y-8">
-            {speakingTopics.map((topic) => (
-              <div
-                key={topic.id}
-                className="bg-neutral-50 rounded-xl p-6 md:p-8 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex flex-col md:flex-row md:items-start gap-6">
-                  {/* Icon */}
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-bitcoin-500 rounded-xl flex items-center justify-center text-3xl">
-                      {topic.icon}
+            {speakingTopics.map((topic) => {
+              const Icon = topic.icon;
+              return (
+                <div
+                  key={topic.id}
+                  className="bg-neutral-50 rounded-xl p-6 md:p-8 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex flex-col md:flex-row md:items-start gap-6">
+                    {/* Icon */}
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-bitcoin-500 rounded-xl flex items-center justify-center">
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
                     </div>
-                  </div>
 
                   {/* Content */}
                   <div className="flex-1">
@@ -132,15 +136,11 @@ export function SpeakingTopicsSection() {
 
                     <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 mb-4">
                       <div className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+                        <Clock className="w-4 h-4" />
                         <span>{topic.duration}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
+                        <Users className="w-4 h-4" />
                         <span>{topic.audienceLevel}</span>
                       </div>
                     </div>
@@ -156,9 +156,7 @@ export function SpeakingTopicsSection() {
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {topic.keyTakeaways.map((takeaway, index) => (
                           <li key={index} className="flex items-start gap-2 text-sm text-neutral-600">
-                            <svg className="w-5 h-5 text-bitcoin-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
+                            <CheckCircle className="w-5 h-5 text-bitcoin-500 flex-shrink-0 mt-0.5" />
                             <span>{takeaway}</span>
                           </li>
                         ))}
@@ -167,7 +165,8 @@ export function SpeakingTopicsSection() {
                   </div>
                 </div>
               </div>
-            ))}
+            );
+          })}
           </div>
 
           {/* Custom Topics CTA */}

@@ -2,16 +2,16 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { QuizResults } from "@/types/form";
+import { QuizResults } from "@/src/types/form";
 import {
   QuickWinsChecklist,
-} from "@/components/quiz";
-import { EmailCaptureForm } from "@/components/forms/EmailCaptureForm";
-import quizData from "@/data/quiz/start-here-quiz.json";
+} from "@/src/components/quiz";
+import { EmailCaptureForm } from "@/src/components/forms/EmailCaptureForm";
+import quizData from "@/src/data/quiz/start-here-quiz.json";
 
 // Dynamic imports for heavy interactive components
 const InteractiveQuiz = dynamic(
-  () => import("@/components/quiz").then((mod) => mod.InteractiveQuiz),
+  () => import("@/src/components/quiz").then((mod) => mod.InteractiveQuiz),
   {
     loading: () => (
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 text-center">
@@ -24,7 +24,7 @@ const InteractiveQuiz = dynamic(
 );
 
 const LearningPathRecommendation = dynamic(
-  () => import("@/components/quiz").then((mod) => mod.LearningPathRecommendation),
+  () => import("@/src/components/quiz").then((mod) => mod.LearningPathRecommendation),
   {
     loading: () => (
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 text-center">
@@ -92,13 +92,12 @@ export default function StartHerePage() {
       <section className="bg-gradient-to-br from-bitcoin-500 to-bitcoin-700 text-white py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Start Your Bitcoin Retirement Journey
+            <h1 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Let's Figure Out Your Starting Point
             </h1>
             <p className="text-xl md:text-2xl text-bitcoin-50 mb-8">
-              Not sure where to begin? Take our 2-minute quiz to get a
-              personalized learning path tailored to your goals and experience
-              level.
+              Answer a few questions. I'll point you to the most relevant
+              resources based on where you are today. Takes about 2 minutes.
             </p>
             {quizState === "intro" && (
               <button

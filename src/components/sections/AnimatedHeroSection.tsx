@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/src/components/ui';
 import { useEffect, useState } from 'react';
+import { Cake, Bitcoin } from 'lucide-react';
 
 // Floating Bitcoin particles component
 function BitcoinParticles() {
@@ -39,22 +40,10 @@ function BitcoinParticles() {
             ease: "linear",
           }}
         >
-          <svg
-            width={particle.size}
-            height={particle.size}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm4.583 8.184h-.915c-.734 0-1.335.602-1.335 1.336v1.336h2.25l-.75 2.25h-1.5v5.744h-2.25v-5.744h-1.5v-2.25h1.5V9.52c0-1.837 1.497-3.334 3.334-3.334h1.166v1.998z"
-              fill="#F7931A"
-            />
-            <path
-              d="M15.75 10.5c0-.69-.28-1.32-.732-1.768L16.5 7.25l-1.5-1.5-1.482 1.482A2.247 2.247 0 0012 6.75v-1.5h-1.5v1.5c-.69 0-1.32.28-1.768.732L7.25 6l-1.5 1.5 1.482 1.482A2.247 2.247 0 006.75 10.5H5.25V12h1.5c0 .69.28 1.32.732 1.768L6 15.25l1.5 1.5 1.482-1.482c.448.452 1.078.732 1.768.732v1.5H12V16c.69 0 1.32-.28 1.768-.732L15.25 16.75l1.5-1.5-1.482-1.482c.452-.448.732-1.078.732-1.768h1.5v-1.5h-1.5z"
-              fill="#F7931A"
-            />
-          </svg>
+          <Bitcoin
+            className="text-bitcoin-500"
+            style={{ width: particle.size, height: particle.size }}
+          />
         </motion.div>
       ))}
     </div>
@@ -94,39 +83,20 @@ export function AnimatedHeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated gradient background */}
-      <motion.div
+      {/* Subtle gradient background */}
+      <div
         className="absolute inset-0"
-        animate={{
-          background: [
-            'linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 50%, #F7931A 100%)',
-            'linear-gradient(135deg, #1A1A1A 0%, #F7931A 50%, #0D0D0D 100%)',
-            'linear-gradient(135deg, #F7931A 0%, #0D0D0D 50%, #1A1A1A 100%)',
-            'linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 50%, #F7931A 100%)',
-          ],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "linear",
+        style={{
+          background: 'linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 50%, #2A2A2A 100%)',
         }}
       />
 
       {/* Bitcoin particles */}
       <BitcoinParticles />
 
-      {/* Glowing orb effect */}
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-bitcoin-500 rounded-full blur-[200px] opacity-20"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.2, 0.3, 0.2],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+      {/* Subtle glowing orb effect */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-bitcoin-500 rounded-full blur-[200px] opacity-10"
       />
 
       <motion.div
@@ -146,37 +116,25 @@ export function AnimatedHeroSection() {
               className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-bitcoin-500/30"
             >
               <span className="text-bitcoin-500 font-bold text-2xl">
-                <AnimatedCounter end={51} />
+                .<AnimatedCounter end={21} />
               </span>
-              <span className="text-white/80">Years Old</span>
+              <span className="text-white/80">bitcoin</span>
             </motion.div>
 
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-success/30"
             >
-              <motion.span
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="text-success font-bold text-2xl"
-              >
-                ✓
-              </motion.span>
-              <span className="text-white/80">Retired Early</span>
+              <Cake className="text-success w-7 h-7" />
+              <span className="text-white/80">Retire Early</span>
             </motion.div>
 
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-bitcoin-500/30"
             >
-              <motion.span
-                animate={{ rotateY: [0, 360] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="text-bitcoin-500 font-bold text-2xl"
-              >
-                ₿
-              </motion.span>
-              <span className="text-white/80">Bitcoin Powered</span>
+              <Bitcoin className="text-bitcoin-500 w-7 h-7" />
+              <span className="text-white/80">Bitcoin Income?</span>
             </motion.div>
           </motion.div>
 
@@ -186,37 +144,23 @@ export function AnimatedHeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+            <h1 className="font-sans text-5xl sm:text-6xl md:text-7xl lg:text-display-xl font-black mb-6 leading-tight">
               <motion.span
                 className="inline-block text-white"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Your Bridge to
-              </motion.span>{' '}
+                Engineer Your
+              </motion.span>
+              <br />
               <motion.span
-                className="inline-block relative"
-                initial={{ opacity: 0, scale: 0.8 }}
+                className="inline-block text-bitcoin-500 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black"
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-bitcoin-400 to-bitcoin-600">
-                  Bitcoin-Powered
-                </span>
-                <motion.div
-                  className="absolute -inset-1 bg-bitcoin-500 blur-xl opacity-30"
-                  animate={{ opacity: [0.3, 0.5, 0.3] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </motion.span>{' '}
-              <motion.span
-                className="inline-block text-white"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                Freedom
+                ₿etirement
               </motion.span>
             </h1>
           </motion.div>
@@ -228,27 +172,8 @@ export function AnimatedHeroSection() {
             transition={{ duration: 0.6, delay: 1 }}
             className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-12 max-w-3xl mx-auto"
           >
-            <motion.span
-              className="inline-block"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            >
-              Real experience.
-            </motion.span>{' '}
-            <motion.span
-              className="inline-block"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 3, delay: 1, repeat: Infinity }}
-            >
-              Proven strategies.
-            </motion.span>{' '}
-            <motion.span
-              className="inline-block"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 3, delay: 2, repeat: Infinity }}
-            >
-              Your path to early retirement.
-            </motion.span>
+            Practical bitcoin strategies from 28 years in engineering.<br />
+            No hype. Just data and experience.
           </motion.p>
 
           {/* Stats with animated counters */}
@@ -295,7 +220,7 @@ export function AnimatedHeroSection() {
                 href="/start-here"
                 className="relative overflow-hidden group"
               >
-                <span className="relative z-10">Start Your Journey</span>
+                <span className="relative z-10">Get Started</span>
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-bitcoin-600 to-bitcoin-400"
                   initial={{ x: '-100%' }}
@@ -320,30 +245,28 @@ export function AnimatedHeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Animated scroll indicator */}
+          {/* Subtle scroll indicator */}
           <motion.div
             className="mt-20"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <motion.svg
-              className="w-8 h-8 mx-auto text-bitcoin-500"
+            <svg
+              className="w-8 h-8 mx-auto text-bitcoin-500 opacity-50"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
             >
               <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </motion.svg>
+            </svg>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Animated wave effect at bottom */}
+      {/* Subtle wave effect at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-32">
         <svg
           viewBox="0 0 1440 120"
@@ -356,12 +279,12 @@ export function AnimatedHeroSection() {
             animate={{
               d: [
                 "M0,64 C360,120 720,0 1440,64 L1440,120 L0,120 Z",
-                "M0,32 C360,0 720,120 1440,32 L1440,120 L0,120 Z",
+                "M0,48 C360,80 720,40 1440,48 L1440,120 L0,120 Z",
                 "M0,64 C360,120 720,0 1440,64 L1440,120 L0,120 Z",
               ],
             }}
             transition={{
-              duration: 8,
+              duration: 15,
               repeat: Infinity,
               ease: "easeInOut",
             }}

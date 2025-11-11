@@ -30,9 +30,9 @@ export const metadata = generateMetadata({
     'bitcoin retirement',
     'early retirement',
     'bitcoin investing',
-    'financial freedom',
-    'cryptocurrency retirement',
-    'bitcoin strategies',
+    'financial independence',
+    'bitcoin allocation',
+    'retirement planning',
   ],
 });
 
@@ -50,7 +50,7 @@ export default function Home() {
       {/* Conversion Optimization Components */}
       <SlideInEmailCapture
         delay={30000}
-        leadMagnet="Bitcoin Retirement Starter Guide"
+        leadMagnet="Practical Bitcoin Retirement Guide"
         tags={[CONVERTKIT_TAGS.HOMEPAGE_SLIDE_IN, CONVERTKIT_TAGS.SLIDE_IN]}
       />
       <SocialProofNotification

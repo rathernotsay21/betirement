@@ -6,21 +6,59 @@
 
 @layer base {
   :root {
-    --font-inter: 'Inter', system-ui, sans-serif;
-    --font-open-sans: 'Open Sans', system-ui, sans-serif;
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-fraunces: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
   }
 
   body {
-    @apply bg-white text-neutral-900;
+    @apply bg-white text-neutral-900 font-body antialiased;
   }
 
+  /* Sophisticated heading hierarchy with premium serif font */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-heading;
+    @apply font-heading tracking-normal;
+  }
+
+  /* Extra bold weight for large display headings */
+  h1 {
+    @apply font-extra-bold leading-[0.95];
+    letter-spacing: 0.005em;
+  }
+
+  h2 {
+    @apply font-bold leading-[1.1];
+    letter-spacing: 0em;
+  }
+
+  h3 {
+    @apply font-semibold leading-[1.2];
+    letter-spacing: -0.01em;
+  }
+
+  h4, h5, h6 {
+    @apply font-medium leading-[1.3];
+    letter-spacing: -0.015em;
+  }
+
+  /* Premium letter-spacing for display headings - optimized for legibility */
+  .font-display {
+    letter-spacing: 0.005em;
+  }
+
+  /* Technical content uses monospace */
+  code, kbd, samp, pre {
+    @apply font-mono;
+  }
+
+  /* Tabular numbers for prices and stats */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
 

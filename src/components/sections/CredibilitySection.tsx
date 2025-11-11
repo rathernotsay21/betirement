@@ -1,41 +1,43 @@
 'use client';
 
+import { Building2, Bitcoin, BarChart3, GraduationCap, Youtube, Users, LucideIcon } from 'lucide-react';
+
 interface CredentialItem {
-  icon: string;
+  icon: LucideIcon;
   title: string;
   description: string;
 }
 
 const credentials: CredentialItem[] = [
   {
-    icon: '🏢',
-    title: 'Professional Background',
-    description: '28 years of corporate experience in finance and technology, with proven track record of strategic planning and execution.',
+    icon: Building2,
+    title: 'Engineering Background',
+    description: '28 years in corporate engineering and technology. Built systems, solved problems, managed risks—skills that translate directly to retirement planning.',
   },
   {
-    icon: '₿',
-    title: 'Bitcoin Expertise',
-    description: '7+ years of deep Bitcoin research and investment experience, from 2017 discovery to successful retirement strategy implementation.',
+    icon: Bitcoin,
+    title: 'Bitcoin Experience',
+    description: '7+ years accumulating and studying bitcoin. Started in 2017, made mistakes, learned lessons, retired at 51.',
   },
   {
-    icon: '📊',
-    title: 'Investment Philosophy',
-    description: 'Balanced approach combining traditional retirement planning with Bitcoin strategies, emphasizing risk management and long-term thinking.',
+    icon: BarChart3,
+    title: 'Practical Approach',
+    description: 'Engineer\'s mindset: measure twice, cut once. Traditional retirement planning plus bitcoin allocation, with proper risk management.',
   },
   {
-    icon: '🎓',
+    icon: GraduationCap,
     title: 'Continuous Learning',
-    description: 'Committed to ongoing education in cryptocurrency, blockchain technology, economics, and retirement planning strategies.',
+    description: 'Continuous study of bitcoin, monetary systems, economics, and retirement planning. Always learning, always testing.',
   },
   {
-    icon: '📺',
-    title: 'Media Appearances',
-    description: 'Featured in podcasts and publications discussing Bitcoin retirement strategies and financial independence.',
+    icon: Youtube,
+    title: 'Sharing Experience',
+    description: 'Regular podcast appearances and articles. I share what worked, what didn\'t, and answer real questions from real people.',
   },
   {
-    icon: '🤝',
-    title: 'Community Builder',
-    description: 'Helping thousands of people understand Bitcoin and build their path to financial freedom through education and mentorship.',
+    icon: Users,
+    title: 'Community Focus',
+    description: 'Helping people understand bitcoin without the hype. Practical guidance based on actual experience, not theory.',
   },
 ];
 
@@ -63,18 +65,21 @@ export function CredibilitySection() {
 
           {/* Credentials grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {credentials.map((credential, index) => (
-              <div
-                key={index}
-                className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-bitcoin-500/50 transition-all hover:transform hover:scale-105"
-              >
-                <div className="text-4xl mb-4">{credential.icon}</div>
-                <h3 className="text-xl font-bold mb-3">{credential.title}</h3>
-                <p className="text-neutral-300 text-sm leading-relaxed">
-                  {credential.description}
-                </p>
-              </div>
-            ))}
+            {credentials.map((credential, index) => {
+              const Icon = credential.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-bitcoin-500/50 transition-all hover:transform hover:scale-105"
+                >
+                  <Icon className="w-10 h-10 mb-4 text-bitcoin-500" />
+                  <h3 className="text-xl font-bold mb-3">{credential.title}</h3>
+                  <p className="text-neutral-300 text-sm leading-relaxed">
+                    {credential.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Investment Philosophy highlight */}

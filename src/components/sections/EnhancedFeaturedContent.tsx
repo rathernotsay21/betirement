@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Video } from '@/src/types/video';
 import { mockVideos } from '@/src/data/mock-videos';
 import { VideoCardSkeleton } from '@/src/components/ui/Skeleton';
+import { Clapperboard, Bitcoin, Palmtree, TrendingUp, Sparkles, ChevronRight, Youtube } from 'lucide-react';
 
 // Video card with animations
 function AnimatedVideoCard({ video, index }: { video: Video; index: number }) {
@@ -21,10 +23,13 @@ function AnimatedVideoCard({ video, index }: { video: Video; index: number }) {
         <div className="relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300">
           {/* Thumbnail with overlay */}
           <div className="relative aspect-video">
-            <img
+            <Image
               src={video.thumbnail.high}
               alt={video.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={index < 3}
             />
 
             {/* Play button overlay */}
@@ -125,11 +130,11 @@ export function EnhancedFeaturedContent() {
   }, []);
 
   const categories = [
-    { id: 'all', label: 'All Videos', icon: '🎬' },
-    { id: 'bitcoin-fundamentals', label: 'Bitcoin Basics', icon: '₿' },
-    { id: 'retirement-planning', label: 'Retirement', icon: '🏖️' },
-    { id: 'investment-strategies', label: 'Strategies', icon: '📈' },
-    { id: 'success-stories', label: 'Success Stories', icon: '🌟' },
+    { id: 'all', label: 'All Videos', icon: Clapperboard },
+    { id: 'bitcoin-fundamentals', label: 'Bitcoin Basics', icon: Bitcoin },
+    { id: 'retirement-planning', label: 'Retirement', icon: Palmtree },
+    { id: 'investment-strategies', label: 'Strategies', icon: TrendingUp },
+    { id: 'success-stories', label: 'Success Stories', icon: Sparkles },
   ];
 
   const filteredVideos = selectedCategory === 'all'
@@ -163,22 +168,25 @@ export function EnhancedFeaturedContent() {
           viewport={{ once: true }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
-          {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                selectedCategory === category.id
-                  ? 'bg-bitcoin-500 text-white shadow-lg'
-                  : 'bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200'
-              }`}
-            >
-              <span className="mr-2">{category.icon}</span>
-              {category.label}
-            </motion.button>
-          ))}
+          {categories.map((category) => {
+            const Icon = category.icon;
+            return (
+              <motion.button
+                key={category.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
+                  selectedCategory === category.id
+                    ? 'bg-bitcoin-500 text-white shadow-lg'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100 border border-neutral-200'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {category.label}
+              </motion.button>
+            );
+          })}
         </motion.div>
 
         {/* Video Grid */}
@@ -212,9 +220,7 @@ export function EnhancedFeaturedContent() {
             className="inline-flex items-center gap-2 px-8 py-4 bg-bitcoin-500 text-white rounded-lg font-semibold hover:bg-bitcoin-600 transition-colors duration-300 shadow-xl hover:shadow-2xl"
           >
             View All Videos
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
+            <ChevronRight className="w-5 h-5" />
           </Link>
         </motion.div>
 
@@ -246,9 +252,7 @@ export function EnhancedFeaturedContent() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-bitcoin-600 rounded-lg font-semibold hover:bg-bitcoin-50 transition-colors"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
+                <Youtube className="w-6 h-6" />
                 Subscribe Now
               </a>
             </div>

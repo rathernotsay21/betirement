@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import { BookOpen, Users, Zap, Target, LucideIcon } from 'lucide-react';
 
 interface ValueProp {
   title: string;
   description: string;
-  icon: string;
+  icon: LucideIcon;
   href: string;
 }
 
@@ -11,25 +12,25 @@ const valueProps: ValueProp[] = [
   {
     title: 'Learn',
     description: 'Master Bitcoin fundamentals and retirement strategies through comprehensive video content and in-depth articles.',
-    icon: '📚',
+    icon: BookOpen,
     href: '/content/videos',
   },
   {
     title: 'Connect',
     description: 'Join a community of like-minded individuals on the same journey to financial freedom and early retirement.',
-    icon: '🤝',
+    icon: Users,
     href: '/community',
   },
   {
     title: 'Implement',
     description: 'Access practical tools, calculators, and step-by-step guides to put your retirement plan into action.',
-    icon: '⚡',
+    icon: Zap,
     href: '/content/resources',
   },
   {
     title: 'Succeed',
     description: 'Follow proven strategies from someone who achieved early retirement at 51 using Bitcoin.',
-    icon: '🎯',
+    icon: Target,
     href: '/about',
   },
 ];
@@ -48,23 +49,26 @@ export function ValuePropositionGrid() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {valueProps.map((prop, index) => (
-            <Link
-              key={index}
-              href={prop.href}
-              className="group p-8 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-bitcoin-500 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                {prop.icon}
-              </div>
-              <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-bitcoin-500 transition-colors">
-                {prop.title}
-              </h3>
-              <p className="text-neutral-600 leading-relaxed">
-                {prop.description}
-              </p>
-            </Link>
-          ))}
+          {valueProps.map((prop, index) => {
+            const Icon = prop.icon;
+            return (
+              <Link
+                key={index}
+                href={prop.href}
+                className="group p-8 bg-neutral-50 rounded-lg border border-neutral-200 hover:border-bitcoin-500 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Icon className="w-12 h-12 text-bitcoin-500" />
+                </div>
+                <h3 className="text-2xl font-bold text-black mb-3 group-hover:text-bitcoin-500 transition-colors">
+                  {prop.title}
+                </h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  {prop.description}
+                </p>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

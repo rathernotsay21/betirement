@@ -58,12 +58,12 @@ export default function AboutPage() {
                 My Story
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               From Corporate to{' '}
-              <span className="text-bitcoin-500">Crypto-Retired</span>
+              <span className="text-bitcoin-500">₿etired</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-neutral-300 mb-8 max-w-3xl mx-auto">
-              How I leveraged Bitcoin to retire at 51 after 28 years in corporate America—and how you can too.
+              How a disciplined bitcoin strategy helped me retire at 51 after 28 years in engineering—practical lessons from real experience.
             </p>
             <div className="flex items-center justify-center gap-8 text-sm sm:text-base">
               <div className="flex items-center gap-2">
@@ -99,10 +99,10 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Start Your Journey?
+              Ready to Learn More?
             </h2>
             <p className="text-lg text-neutral-600 mb-8 max-w-2xl mx-auto">
-              Whether you're just discovering Bitcoin or already investing, I'm here to help you build your path to financial freedom.
+              Whether you're new to bitcoin or already accumulating, I share what's worked from an engineer's perspective—no hype, just data and experience.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

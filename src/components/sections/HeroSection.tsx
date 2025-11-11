@@ -2,6 +2,7 @@
 
 import { Button } from '@/src/components/ui';
 import Link from 'next/link';
+import { CheckCircle2, Bitcoin } from 'lucide-react';
 
 export function HeroSection() {
   return (
@@ -24,18 +25,18 @@ export function HeroSection() {
             </div>
             <div className="h-8 w-px bg-neutral-700" />
             <div className="flex items-center gap-2">
-              <span className="text-success font-bold text-2xl">✓</span>
+              <CheckCircle2 className="text-success w-7 h-7" />
               <span className="text-neutral-300">Retired</span>
             </div>
             <div className="h-8 w-px bg-neutral-700" />
             <div className="flex items-center gap-2">
-              <span className="text-bitcoin-500 font-bold text-2xl">₿</span>
+              <Bitcoin className="text-bitcoin-500 w-7 h-7" />
               <span className="text-neutral-300">Bitcoin Powered</span>
             </div>
           </div>
 
           {/* Main headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-display-lg font-black mb-6 leading-tight">
             Your Bridge to{' '}
             <span className="text-bitcoin-500">Bitcoin-Powered</span>{' '}
             Freedom

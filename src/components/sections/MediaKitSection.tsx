@@ -2,6 +2,7 @@
 
 import { Button } from '@/src/components/ui';
 import { useState } from 'react';
+import { FileText, Camera, Mic, Video, Smartphone, Mail, LucideIcon } from 'lucide-react';
 
 export function MediaKitSection() {
   const [downloading, setDownloading] = useState(false);
@@ -19,32 +20,32 @@ export function MediaKitSection() {
     {
       title: 'Professional Bio',
       description: 'Short and long-form bios for various formats',
-      icon: '📝',
+      icon: FileText,
     },
     {
       title: 'High-Res Photos',
       description: 'Professional headshots and lifestyle images',
-      icon: '📸',
+      icon: Camera,
     },
     {
       title: 'Speaking Topics',
       description: 'Detailed descriptions of available presentations',
-      icon: '🎤',
+      icon: Mic,
     },
     {
       title: 'Past Appearances',
       description: 'Links to previous talks, podcasts, and interviews',
-      icon: '🎬',
+      icon: Video,
     },
     {
       title: 'Social Media',
       description: 'Handles, follower counts, and engagement stats',
-      icon: '📱',
+      icon: Smartphone,
     },
     {
       title: 'Contact Info',
       description: 'Direct booking contact and response times',
-      icon: '✉️',
+      icon: Mail,
     },
   ];
 
@@ -70,16 +71,19 @@ export function MediaKitSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-            {mediaKitItems.map((item, index) => (
-              <div
-                key={index}
-                className="bg-neutral-50 rounded-lg p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-neutral-600">{item.description}</p>
-              </div>
-            ))}
+            {mediaKitItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-neutral-50 rounded-lg p-6 hover:shadow-lg transition-shadow"
+                >
+                  <Icon className="w-10 h-10 mb-4 text-bitcoin-500" />
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-neutral-600">{item.description}</p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Quick Stats */}

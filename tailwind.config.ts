@@ -37,8 +37,31 @@ const config: Config = {
         },
       },
       fontFamily: {
-        heading: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        body: ['var(--font-open-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-fraunces)', 'Georgia', 'Times New Roman', 'serif'],
+        heading: ['var(--font-fraunces)', 'Georgia', 'Times New Roman', 'serif'],
+        body: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'sans-serif'],
+        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SF Mono', 'Cascadia Code', 'Consolas', 'monospace'],
+      },
+      fontSize: {
+        // Display sizes for premium hero sections with improved legibility
+        'display-xl': ['5rem', { lineHeight: '1', letterSpacing: '0.01em' }],
+        'display-lg': ['4rem', { lineHeight: '1.1', letterSpacing: '0.005em' }],
+        'display-md': ['3rem', { lineHeight: '1.2', letterSpacing: '0em' }],
+      },
+      letterSpacing: {
+        'tightest': '-0.075em',
+        'tighter': '-0.05em',
+        'tight': '-0.025em',
+        'normal': '0em',
+        'wide': '0.025em',
+        'wider': '0.05em',
+        'widest': '0.1em',
+      },
+      fontWeight: {
+        'extra-light': '200',
+        'extra-bold': '800',
+        'black': '900',
       },
     },
   },

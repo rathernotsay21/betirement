@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { siteConfig } from '@/src/config/site';
 import { getAllBlogPosts } from '@/src/lib/blog';
 import { youtubeClient } from '@/src/lib/youtube';
+import { mockVideos } from '@/src/data/mock-videos';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
@@ -82,14 +83,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let videoPages: MetadataRoute.Sitemap = [];
   try {
     const videos = await youtubeClient.getChannelVideos(50);
-    videoPages = videos.map((video) => ({
+    if (videos.length > 0) {
+      videoPages = videos.map((video) => ({
+        url: `${baseUrl}/content/videos/${video.id}`,
+        lastModified: new Date(video.publishedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.5,
+      }));
+    } else {
+      // Fallback to mock videos if YouTube API returns no videos
+      videoPages = mockVideos.slice(0, 10).map((video) => ({
+        url: `${baseUrl}/content/videos/${video.id}`,
+        lastModified: new Date(video.publishedAt),
+        changeFrequency: 'monthly' as const,
+        priority: 0.5,
+      }));
+    }
+  } catch (error) {
+    console.error('Error fetching videos for sitemap (using mock data):', error);
+    // Fallback to mock videos on error
+    videoPages = mockVideos.slice(0, 10).map((video) => ({
       url: `${baseUrl}/content/videos/${video.id}`,
       lastModified: new Date(video.publishedAt),
       changeFrequency: 'monthly' as const,
       priority: 0.5,
     }));
-  } catch (error) {
-    console.error('Error fetching videos for sitemap:', error);
   }
 
   return [...staticPages, ...blogPages, ...videoPages];

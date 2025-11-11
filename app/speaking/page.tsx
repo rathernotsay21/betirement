@@ -22,9 +22,9 @@ const BookingRequestForm = dynamic(
 
 export const metadata = generateMetadata({
   title: 'Speaking & Media',
-  description: 'Book Michael for speaking engagements, podcasts, and media appearances. Expert insights on Bitcoin retirement strategies and financial independence.',
+  description: 'Book Michael for speaking engagements, podcasts, and media appearances. Practical insights on bitcoin retirement strategies from an engineer who did it.',
   url: '/speaking',
-  keywords: ['bitcoin speaker', 'retirement speaker', 'cryptocurrency expert', 'financial independence speaker', 'podcast guest'],
+  keywords: ['bitcoin speaker', 'retirement speaker', 'bitcoin expert', 'financial independence speaker', 'podcast guest'],
 });
 
 export default function SpeakingPage() {
@@ -57,12 +57,12 @@ export default function SpeakingPage() {
                 Speaking & Media
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               Book Michael for Your{' '}
               <span className="text-bitcoin-500">Next Event</span>
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-neutral-300 mb-8 max-w-3xl mx-auto">
-              Engaging speaker on Bitcoin retirement strategies, financial independence, and cryptocurrency investing. Real experience, proven strategies, actionable insights.
+              I share practical lessons from retiring at 51 with bitcoin. No theory, just what actually worked from an engineer's perspective.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

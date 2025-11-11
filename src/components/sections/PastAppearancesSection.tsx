@@ -1,5 +1,7 @@
 'use client';
 
+import { Mic, Radio, FileText, ChevronRight } from 'lucide-react';
+
 const appearances = [
   {
     id: 1,
@@ -15,13 +17,13 @@ const appearances = [
     title: 'Financial Independence Summit 2024',
     type: 'Conference',
     date: 'February 2024',
-    description: 'Keynote: "From Corporate to Crypto-Retired: A Real-World Journey"',
+    description: 'Keynote: "From Corporate to ₿etired: An Engineer\'s Journey"',
     link: 'https://example.com/conference-1',
     image: '/images/media/conference-1.jpg',
   },
   {
     id: 3,
-    title: 'Crypto Investing Weekly',
+    title: 'Bitcoin Strategy Weekly',
     type: 'Podcast',
     date: 'January 2024',
     description: 'Discussing risk management and portfolio diversification with Bitcoin',
@@ -83,11 +85,9 @@ export function PastAppearancesSection() {
                 {/* Image placeholder */}
                 <div className="relative h-48 bg-gradient-to-br from-bitcoin-500 to-bitcoin-600 overflow-hidden">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white text-6xl opacity-50">
-                      {appearance.type === 'Podcast' && '🎙️'}
-                      {appearance.type === 'Conference' && '🎤'}
-                      {appearance.type === 'Article' && '📰'}
-                    </div>
+                    {appearance.type === 'Podcast' && <Radio className="text-white w-16 h-16 opacity-50" />}
+                    {appearance.type === 'Conference' && <Mic className="text-white w-16 h-16 opacity-50" />}
+                    {appearance.type === 'Article' && <FileText className="text-white w-16 h-16 opacity-50" />}
                   </div>
                   <div className="absolute top-4 right-4">
                     <span className="inline-block bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-bitcoin-600">
@@ -108,19 +108,7 @@ export function PastAppearancesSection() {
                   </p>
                   <div className="flex items-center text-bitcoin-500 font-semibold text-sm group-hover:gap-2 transition-all">
                     <span>View Appearance</span>
-                    <svg
-                      className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
+                    <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </a>

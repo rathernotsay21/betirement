@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Betirement",
-  title: "Betirement - Your Bridge to Bitcoin-Powered Freedom",
-  description: "Real experience. Proven strategies. Your path to early retirement with Bitcoin.",
+  title: "₿etirement - Engineer Your Bitcoin Retirement",
+  description: "Practical bitcoin strategies from 28 years in engineering. No hype, just data and experience.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://betirement.com",
   ogImage: "/images/og-image.jpg",
   links: {
@@ -13,15 +13,15 @@ export const siteConfig = {
   author: {
     name: "Michael",
     email: "contact@betirement.com",
-    bio: "Retired at 51 using Bitcoin strategies. Sharing real experience and proven strategies for Bitcoin-powered early retirement.",
+    bio: "Retired at 51 with bitcoin. Engineer sharing practical lessons from actual experience, not theory.",
   },
   keywords: [
     "bitcoin retirement",
     "early retirement",
-    "bitcoin investing",
+    "bitcoin allocation",
     "financial independence",
-    "cryptocurrency retirement",
-    "bitcoin strategies",
+    "engineer retirement",
+    "bitcoin strategy",
   ],
 } as const;
 

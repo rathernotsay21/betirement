@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Bitcoin, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface PriceData {
   price: number;
@@ -9,6 +10,8 @@ interface PriceData {
   changePercent24h: number;
   high24h: number;
   low24h: number;
+  marketCap: number;
+  volume24h: number;
   lastUpdated: Date;
 }
 
@@ -17,58 +20,152 @@ export function BitcoinPriceTicker() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [previousPrice, setPreviousPrice] = useState<number | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const [isOnline, setIsOnline] = useState(true);
 
-  // Fetch Bitcoin price
-  const fetchPrice = async () => {
+  // Check if cached data is fresh (less than 25 seconds old)
+  const isCacheFresh = () => {
+    const cachedData = localStorage.getItem('bitcoinPriceData');
+    if (!cachedData) return false;
+
     try {
-      const response = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=BTC');
+      const parsed = JSON.parse(cachedData);
+      const cacheAge = Date.now() - new Date(parsed.lastUpdated).getTime();
+      return cacheAge < 25000; // 25 seconds (slightly less than update interval)
+    } catch {
+      return false;
+    }
+  };
+
+  // Fetch Bitcoin price with real market data from CoinGecko
+  const fetchPrice = useCallback(async (forceRefresh = false) => {
+    // Use cached data if it's fresh and not forcing refresh
+    if (!forceRefresh && isCacheFresh()) {
+      const cachedData = localStorage.getItem('bitcoinPriceData');
+      if (cachedData) {
+        const parsed = JSON.parse(cachedData);
+        setPriceData({
+          ...parsed,
+          lastUpdated: new Date(parsed.lastUpdated),
+        });
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
+      // Use our API route to avoid CORS issues
+      const response = await fetch('/api/bitcoin/price');
 
       if (!response.ok) {
         throw new Error('Failed to fetch price');
       }
 
-      const data = await response.json();
-      const usdPrice = parseFloat(data.data.rates.USD);
+      const result = await response.json();
 
-      // Calculate 24h change (mock data for demo since Coinbase doesn't provide it directly)
-      const mockChange = (Math.random() - 0.5) * 5000; // Random change for demo
-      const mockChangePercent = (mockChange / usdPrice) * 100;
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to fetch price');
+      }
+
+      const { data } = result;
 
       setPreviousPrice(priceData?.price || null);
       setPriceData({
-        price: usdPrice,
-        change24h: mockChange,
-        changePercent24h: mockChangePercent,
-        high24h: usdPrice + Math.abs(mockChange),
-        low24h: usdPrice - Math.abs(mockChange),
-        lastUpdated: new Date(),
+        price: data.price,
+        change24h: data.change24h,
+        changePercent24h: data.changePercent24h,
+        high24h: data.high24h,
+        low24h: data.low24h,
+        marketCap: data.marketCap,
+        volume24h: data.volume24h,
+        lastUpdated: new Date(data.lastUpdated),
       });
       setError(null);
+      setRetryCount(0); // Reset retry count on success
     } catch (err) {
       console.error('Error fetching Bitcoin price:', err);
-      setError('Failed to load price');
+      setRetryCount(prev => prev + 1); // Increment retry count on error
 
-      // Fallback to mock data
-      setPriceData({
-        price: 98542.50,
-        change24h: 2156.30,
-        changePercent24h: 2.24,
-        high24h: 99850.00,
-        low24h: 96200.00,
-        lastUpdated: new Date(),
-      });
+      // Try to use cached data if available
+      const cachedData = localStorage.getItem('bitcoinPriceData');
+      if (cachedData) {
+        const parsed = JSON.parse(cachedData);
+        setPriceData({
+          ...parsed,
+          lastUpdated: new Date(parsed.lastUpdated),
+        });
+        setError('Using cached data');
+      } else {
+        setError('Failed to load price');
+        // Only use fallback if no cached data exists
+        setPriceData({
+          price: 98542.50,
+          change24h: 2156.30,
+          changePercent24h: 2.24,
+          high24h: 99850.00,
+          low24h: 96200.00,
+          marketCap: 1932000000000,
+          volume24h: 28500000000,
+          lastUpdated: new Date(),
+        });
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, [priceData]);
 
-  // Fetch price on mount and set up interval
+  // Cache successful data
   useEffect(() => {
-    fetchPrice();
-    const interval = setInterval(fetchPrice, 30000); // Update every 30 seconds
+    if (priceData && !error) {
+      localStorage.setItem('bitcoinPriceData', JSON.stringify({
+        ...priceData,
+        lastUpdated: priceData.lastUpdated.toISOString(),
+      }));
+    }
+  }, [priceData, error]);
 
-    return () => clearInterval(interval);
-  }, []);
+  // Monitor online/offline status
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+      setRetryCount(0);
+      fetchPrice(true); // Force refresh when coming back online
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+      setError('No internet connection');
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Check initial online status
+    setIsOnline(navigator.onLine);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, [fetchPrice]);
+
+  // Fetch price on mount and set up interval with retry logic
+  useEffect(() => {
+    fetchPrice(true); // Force refresh on mount
+
+    // Dynamic interval based on retry count (exponential backoff)
+    const baseInterval = 30000; // 30 seconds
+    const maxInterval = 120000; // 2 minutes max
+    const interval = Math.min(baseInterval * Math.pow(1.5, retryCount), maxInterval);
+
+    const timer = setInterval(() => {
+      if (isOnline) {
+        fetchPrice(); // Use cache if fresh
+      }
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [retryCount, isOnline, fetchPrice]);
 
   // Format price with commas
   const formatPrice = (price: number) => {
@@ -151,7 +248,7 @@ export function BitcoinPriceTicker() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: priceDirection === 'up' ? -10 : 10 }}
             transition={{ duration: 0.3 }}
-            className="text-white font-bold text-lg"
+            className="text-white font-mono font-semibold text-lg tabular-nums"
           >
             {formatPrice(priceData.price)}
           </motion.span>
@@ -178,7 +275,7 @@ export function BitcoinPriceTicker() {
               d="M5 15l7-7 7 7"
             />
           </svg>
-          <span className="text-sm font-medium">{formatPercent(priceData.changePercent24h)}</span>
+          <span className="text-sm font-mono font-medium tabular-nums">{formatPercent(priceData.changePercent24h)}</span>
         </motion.div>
       </div>
 
@@ -186,11 +283,11 @@ export function BitcoinPriceTicker() {
       <div className="hidden lg:flex items-center gap-3 ml-3 pl-3 border-l border-white/20">
         <div className="text-xs">
           <div className="text-white/60">24h High</div>
-          <div className="text-white font-medium">{formatPrice(priceData.high24h)}</div>
+          <div className="text-white font-mono font-medium tabular-nums">{formatPrice(priceData.high24h)}</div>
         </div>
         <div className="text-xs">
           <div className="text-white/60">24h Low</div>
-          <div className="text-white font-medium">{formatPrice(priceData.low24h)}</div>
+          <div className="text-white font-mono font-medium tabular-nums">{formatPrice(priceData.low24h)}</div>
         </div>
       </div>
 
@@ -211,26 +308,53 @@ export function BitcoinPriceTicker() {
 export function BitcoinPriceTickerCompact() {
   const [price, setPrice] = useState<number | null>(null);
   const [change, setChange] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPrice = async () => {
       try {
-        const response = await fetch('https://api.coinbase.com/v2/exchange-rates?currency=BTC');
-        const data = await response.json();
-        const usdPrice = parseFloat(data.data.rates.USD);
-        setPrice(usdPrice);
+        // Use our API route to avoid CORS issues
+        const response = await fetch('/api/bitcoin/price');
 
-        // Mock change for demo
-        setChange((Math.random() - 0.5) * 10);
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.data) {
+            setPrice(result.data.price);
+            setChange(result.data.changePercent24h || 0);
+
+            // Cache the data
+            localStorage.setItem('bitcoinCompactData', JSON.stringify({
+              price: result.data.price,
+              change: result.data.changePercent24h || 0,
+              timestamp: Date.now()
+            }));
+          } else {
+            throw new Error('Failed to fetch');
+          }
+        } else {
+          throw new Error('Failed to fetch');
+        }
       } catch (error) {
-        // Fallback price
-        setPrice(98542.50);
-        setChange(2.24);
+        console.error('Error fetching Bitcoin price:', error);
+
+        // Try to use cached data
+        const cached = localStorage.getItem('bitcoinCompactData');
+        if (cached) {
+          const data = JSON.parse(cached);
+          setPrice(data.price);
+          setChange(data.change);
+        } else {
+          // Fallback price only if no cache
+          setPrice(98542.50);
+          setChange(2.24);
+        }
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPrice();
-    const interval = setInterval(fetchPrice, 30000);
+    const interval = setInterval(fetchPrice, 30000); // Update every 30 seconds
     return () => clearInterval(interval);
   }, []);
 
@@ -244,12 +368,13 @@ export function BitcoinPriceTickerCompact() {
       animate={{ opacity: 1 }}
       className="flex items-center gap-2 text-sm"
     >
-      <span className="text-bitcoin-500 font-bold text-lg">₿</span>
+      <Bitcoin className="text-bitcoin-500 w-5 h-5" />
       <span className="text-white font-medium">
         ${price.toLocaleString('en-US', { maximumFractionDigits: 0 })}
       </span>
-      <span className={`text-xs ${isPositive ? 'text-success' : 'text-red-400'}`}>
-        {isPositive ? '▲' : '▼'} {Math.abs(change).toFixed(1)}%
+      <span className={`flex items-center gap-1 text-xs ${isPositive ? 'text-success' : 'text-red-400'}`}>
+        {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+        {Math.abs(change).toFixed(1)}%
       </span>
     </motion.div>
   );

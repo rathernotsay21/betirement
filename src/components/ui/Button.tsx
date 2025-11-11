@@ -4,7 +4,7 @@ import { cn } from '@/src/lib/utils';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   href?: string;
   onClick?: () => void;
@@ -42,6 +42,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       sm: 'px-4 py-2.5 text-sm rounded min-h-[44px]', // Ensure 44px min height for touch
       md: 'px-5 py-3 text-base rounded-md min-h-[44px]',
       lg: 'px-6 py-3.5 text-lg rounded-lg min-h-[48px]',
+      xl: 'px-8 py-4 text-xl rounded-lg min-h-[56px]',
     };
 
     const buttonClasses = cn(
