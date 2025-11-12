@@ -3,14 +3,15 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { safeGetItem, safeSetItem } from '@/src/lib/storage';
 
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if user has already consented
-    const consent = localStorage.getItem('cookie-consent');
+    // Check if user has already consented (with Safari-safe storage access)
+    const consent = safeGetItem('cookie-consent');
     if (!consent) {
       // Delay showing banner slightly for better UX
       setTimeout(() => {
@@ -21,14 +22,14 @@ export function CookieConsent() {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
-    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    safeSetItem('cookie-consent', 'accepted');
+    safeSetItem('cookie-consent-date', new Date().toISOString());
     closeBanner();
   };
 
   const handleDecline = () => {
-    localStorage.setItem('cookie-consent', 'declined');
-    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    safeSetItem('cookie-consent', 'declined');
+    safeSetItem('cookie-consent-date', new Date().toISOString());
     closeBanner();
   };
 

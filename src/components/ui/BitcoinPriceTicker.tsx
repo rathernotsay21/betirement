@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bitcoin, TrendingUp, TrendingDown } from 'lucide-react';
+import { safeGetJSON, safeSetJSON } from '@/src/lib/storage';
 
 interface PriceData {
   price: number;
@@ -25,12 +26,11 @@ export function BitcoinPriceTicker() {
 
   // Check if cached data is fresh (less than 25 seconds old)
   const isCacheFresh = () => {
-    const cachedData = localStorage.getItem('bitcoinPriceData');
+    const cachedData = safeGetJSON<{ lastUpdated: string }>('bitcoinPriceData');
     if (!cachedData) return false;
 
     try {
-      const parsed = JSON.parse(cachedData);
-      const cacheAge = Date.now() - new Date(parsed.lastUpdated).getTime();
+      const cacheAge = Date.now() - new Date(cachedData.lastUpdated).getTime();
       return cacheAge < 25000; // 25 seconds (slightly less than update interval)
     } catch {
       return false;
@@ -41,12 +41,11 @@ export function BitcoinPriceTicker() {
   const fetchPrice = useCallback(async (forceRefresh = false) => {
     // Use cached data if it's fresh and not forcing refresh
     if (!forceRefresh && isCacheFresh()) {
-      const cachedData = localStorage.getItem('bitcoinPriceData');
+      const cachedData = safeGetJSON<PriceData & { lastUpdated: string }>('bitcoinPriceData');
       if (cachedData) {
-        const parsed = JSON.parse(cachedData);
         setPriceData({
-          ...parsed,
-          lastUpdated: new Date(parsed.lastUpdated),
+          ...cachedData,
+          lastUpdated: new Date(cachedData.lastUpdated),
         });
         setLoading(false);
         return;
@@ -87,12 +86,11 @@ export function BitcoinPriceTicker() {
       setRetryCount(prev => prev + 1); // Increment retry count on error
 
       // Try to use cached data if available
-      const cachedData = localStorage.getItem('bitcoinPriceData');
+      const cachedData = safeGetJSON<PriceData & { lastUpdated: string }>('bitcoinPriceData');
       if (cachedData) {
-        const parsed = JSON.parse(cachedData);
         setPriceData({
-          ...parsed,
-          lastUpdated: new Date(parsed.lastUpdated),
+          ...cachedData,
+          lastUpdated: new Date(cachedData.lastUpdated),
         });
         setError('Using cached data');
       } else {
@@ -117,10 +115,10 @@ export function BitcoinPriceTicker() {
   // Cache successful data
   useEffect(() => {
     if (priceData && !error) {
-      localStorage.setItem('bitcoinPriceData', JSON.stringify({
+      safeSetJSON('bitcoinPriceData', {
         ...priceData,
         lastUpdated: priceData.lastUpdated.toISOString(),
-      }));
+      });
     }
   }, [priceData, error]);
 
@@ -323,11 +321,11 @@ export function BitcoinPriceTickerCompact() {
             setChange(result.data.changePercent24h || 0);
 
             // Cache the data
-            localStorage.setItem('bitcoinCompactData', JSON.stringify({
+            safeSetJSON('bitcoinCompactData', {
               price: result.data.price,
               change: result.data.changePercent24h || 0,
               timestamp: Date.now()
-            }));
+            });
           } else {
             throw new Error('Failed to fetch');
           }
@@ -338,11 +336,10 @@ export function BitcoinPriceTickerCompact() {
         console.error('Error fetching Bitcoin price:', error);
 
         // Try to use cached data
-        const cached = localStorage.getItem('bitcoinCompactData');
+        const cached = safeGetJSON<{ price: number; change: number }>('bitcoinCompactData');
         if (cached) {
-          const data = JSON.parse(cached);
-          setPrice(data.price);
-          setChange(data.change);
+          setPrice(cached.price);
+          setChange(cached.change);
         } else {
           // Fallback price only if no cache
           setPrice(98542.50);

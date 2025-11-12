@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { safeGetItem, safeSetItem } from '@/src/lib/storage';
 
 interface SocialProofEvent {
   id: string;
@@ -60,8 +61,8 @@ export function SocialProofNotification({
   const [eventIndex, setEventIndex] = useState(0);
 
   useEffect(() => {
-    // Check if user has dismissed notifications
-    const isDismissed = sessionStorage.getItem('social_proof_dismissed');
+    // Check if user has dismissed notifications (with Safari-safe storage access)
+    const isDismissed = safeGetItem('social_proof_dismissed', 'session');
     if (isDismissed || events.length === 0) {
       return;
     }
@@ -76,7 +77,7 @@ export function SocialProofNotification({
   }, []);
 
   const showNextEvent = () => {
-    const isDismissed = sessionStorage.getItem('social_proof_dismissed');
+    const isDismissed = safeGetItem('social_proof_dismissed', 'session');
     if (isDismissed) return;
 
     // Get next event
@@ -98,7 +99,7 @@ export function SocialProofNotification({
 
   const handleDismiss = () => {
     setIsVisible(false);
-    sessionStorage.setItem('social_proof_dismissed', 'true');
+    safeSetItem('social_proof_dismissed', 'true', 'session');
   };
 
   if (!currentEvent || !isVisible) {

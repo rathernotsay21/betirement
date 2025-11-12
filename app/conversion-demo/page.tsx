@@ -11,6 +11,7 @@ import {
 } from '@/src/components/conversion';
 import { Button } from '@/src/components/ui';
 import { CONVERTKIT_TAGS } from '@/src/lib/convertkit';
+import { safeRemoveItem } from '@/src/lib/storage';
 
 // Demo component that uses A/B testing
 function ABTestDemo() {
@@ -54,10 +55,10 @@ export default function ConversionDemoPage() {
   const [showSocialProof, setShowSocialProof] = useState(false);
 
   const handleResetStorage = () => {
-    localStorage.removeItem('betirement_subscribed');
-    sessionStorage.removeItem('slide_in_dismissed');
-    sessionStorage.removeItem('social_proof_dismissed');
-    localStorage.removeItem('ab_test_assignments');
+    safeRemoveItem('betirement_subscribed');
+    safeRemoveItem('slide_in_dismissed', 'session');
+    safeRemoveItem('social_proof_dismissed', 'session');
+    safeRemoveItem('ab_test_assignments');
     alert('Storage cleared! Refresh the page to see components again.');
   };
 

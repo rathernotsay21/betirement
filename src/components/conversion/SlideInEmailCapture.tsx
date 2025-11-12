@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { EmailCaptureForm } from '@/src/components/forms';
 import { Button } from '@/src/components/ui';
 import { ConvertKitTag } from '@/src/lib/convertkit';
+import { safeGetItem, safeSetItem } from '@/src/lib/storage';
 
 interface SlideInEmailCaptureProps {
   delay?: number; // Delay in milliseconds before showing (default: 30000ms = 30s)
@@ -20,9 +21,9 @@ export function SlideInEmailCapture({
   const [isDismissed, setIsDismissed] = useState(false);
 
   useEffect(() => {
-    // Check if user has already dismissed or subscribed
-    const hasSubscribed = localStorage.getItem('betirement_subscribed');
-    const hasDismissed = sessionStorage.getItem('slide_in_dismissed');
+    // Check if user has already dismissed or subscribed (with Safari-safe storage access)
+    const hasSubscribed = safeGetItem('betirement_subscribed');
+    const hasDismissed = safeGetItem('slide_in_dismissed', 'session');
 
     if (hasSubscribed || hasDismissed) {
       return;
@@ -39,12 +40,12 @@ export function SlideInEmailCapture({
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
-    sessionStorage.setItem('slide_in_dismissed', 'true');
+    safeSetItem('slide_in_dismissed', 'true', 'session');
   };
 
   const handleSuccess = () => {
     setIsVisible(false);
-    localStorage.setItem('betirement_subscribed', 'true');
+    safeSetItem('betirement_subscribed', 'true');
   };
 
   if (!isVisible || isDismissed) {

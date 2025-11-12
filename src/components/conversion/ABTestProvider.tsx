@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { trackEvent } from '@/src/lib/analytics';
+import { safeGetJSON, safeSetJSON } from '@/src/lib/storage';
 
 interface ABTest {
   id: string;
@@ -47,9 +48,8 @@ export function ABTestProvider({ children, tests = [] }: ABTestProviderProps) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Load existing assignments from localStorage
-    const stored = localStorage.getItem('ab_test_assignments');
-    const existingAssignments = stored ? JSON.parse(stored) : {};
+    // Load existing assignments from localStorage (with Safari-safe storage access)
+    const existingAssignments = safeGetJSON<Record<string, string>>('ab_test_assignments') || {};
 
     // Assign variants for any new tests
     const newAssignments = { ...existingAssignments };
@@ -70,7 +70,7 @@ export function ABTestProvider({ children, tests = [] }: ABTestProviderProps) {
     });
 
     if (hasNewAssignments) {
-      localStorage.setItem('ab_test_assignments', JSON.stringify(newAssignments));
+      safeSetJSON('ab_test_assignments', newAssignments);
     }
 
     setAssignments(newAssignments);
