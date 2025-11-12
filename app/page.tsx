@@ -9,11 +9,6 @@ import { generateMetadata } from '@/src/lib/seo';
 import { CONVERTKIT_TAGS } from '@/src/lib/convertkit';
 
 // Dynamic imports for below-fold and interactive components
-const ExitIntentPopup = dynamic(
-  () => import('@/src/components/sections').then((mod) => mod.ExitIntentPopup),
-  { ssr: false }
-);
-
 const SlideInEmailCapture = dynamic(
   () => import('@/src/components/conversion').then((mod) => mod.SlideInEmailCapture),
   { ssr: false }
@@ -45,8 +40,7 @@ export default function Home() {
         <ValuePropositionGrid />
         <EnhancedFeaturedContent />
       </main>
-      <ExitIntentPopup />
-      
+
       {/* Conversion Optimization Components */}
       <SlideInEmailCapture
         delay={30000}
