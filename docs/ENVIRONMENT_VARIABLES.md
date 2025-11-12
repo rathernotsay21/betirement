@@ -33,7 +33,7 @@ These variables must be set for the application to function properly.
   3. Enable YouTube Data API v3
   4. Create credentials (API key)
   5. Restrict the key to YouTube Data API v3
-- **Example**: `AIzaSyAbc123def456ghi789jkl012mno345pqr`
+- **Example Format**: Starts with `AIza` followed by 35 alphanumeric characters
 
 #### `YOUTUBE_CHANNEL_ID`
 - **Type**: String

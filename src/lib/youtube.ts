@@ -82,11 +82,30 @@ export class YouTubeClient {
   }
 
   /**
+   * Detect if we're in a CI/build environment
+   * Returns true if running in Netlify, CI, or with invalid/missing API keys
+   */
+  private isBuildTime(): boolean {
+    // Check for CI environment variables
+    const isCI = process.env.CI === 'true' ||
+                 process.env.NETLIFY === 'true' ||
+                 process.env.VERCEL === '1';
+
+    // Check if API key is missing or looks like a placeholder
+    const hasInvalidKey = !this.apiKey ||
+                          this.apiKey.includes('YOUR_') ||
+                          this.apiKey.includes('PLACEHOLDER') ||
+                          this.apiKey === 'mock';
+
+    return isCI || hasInvalidKey;
+  }
+
+  /**
    * Check if we're within rate limits
    */
   private checkRateLimit(): boolean {
     const now = Date.now();
-    
+
     // Reset counter if window has passed
     if (now - requestWindowStart > RATE_LIMIT_WINDOW) {
       requestCount = 0;
@@ -234,8 +253,14 @@ export class YouTubeClient {
    * Get videos from a channel
    */
   async getChannelVideos(maxResults: number = 50): Promise<Video[]> {
+    // Skip API calls during build time
+    if (this.isBuildTime()) {
+      console.log("Build time detected - skipping YouTube API call for channel videos");
+      return [];
+    }
+
     const cacheKey = `channel_videos_${this.channelId}_${maxResults}`;
-    
+
     // Check cache first
     const cached = this.getFromCache<Video[]>(cacheKey);
     if (cached) {
@@ -287,8 +312,14 @@ export class YouTubeClient {
    * Get details for a specific video
    */
   async getVideoDetails(videoId: string): Promise<Video | null> {
+    // Skip API calls during build time
+    if (this.isBuildTime()) {
+      console.log("Build time detected - skipping YouTube API call for video details");
+      return null;
+    }
+
     const cacheKey = `video_${videoId}`;
-    
+
     // Check cache first
     const cached = this.getFromCache<Video>(cacheKey);
     if (cached) {
@@ -332,8 +363,14 @@ export class YouTubeClient {
    * Get videos from a specific playlist
    */
   async getPlaylistVideos(playlistId: string, maxResults: number = 50): Promise<Video[]> {
+    // Skip API calls during build time
+    if (this.isBuildTime()) {
+      console.log("Build time detected - skipping YouTube API call for playlist videos");
+      return [];
+    }
+
     const cacheKey = `playlist_${playlistId}_${maxResults}`;
-    
+
     // Check cache first
     const cached = this.getFromCache<Video[]>(cacheKey);
     if (cached) {
@@ -387,8 +424,14 @@ export class YouTubeClient {
    * Search for videos by query
    */
   async searchVideos(query: string, maxResults: number = 20): Promise<Video[]> {
+    // Skip API calls during build time
+    if (this.isBuildTime()) {
+      console.log("Build time detected - skipping YouTube API call for video search");
+      return [];
+    }
+
     const cacheKey = `search_${query}_${maxResults}`;
-    
+
     // Check cache first
     const cached = this.getFromCache<Video[]>(cacheKey);
     if (cached) {
