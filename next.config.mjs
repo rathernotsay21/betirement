@@ -4,8 +4,8 @@ import rehypeHighlight from 'rehype-highlight';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Optimize for Netlify deployment
-  output: 'standalone',
+  // Optimize for Netlify deployment with Next.js plugin
+  // Note: 'standalone' output mode is incompatible with Netlify serverless functions
   
   // Enable MDX support
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
@@ -75,7 +75,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://www.youtube.com https://i.ytimg.com https://plausible.io https://vitals.vercel-insights.com",
+              "connect-src 'self' https://www.youtube.com https://i.ytimg.com https://plausible.io https://vitals.vercel-insights.com https://api.coingecko.com",
               "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
               "media-src 'self' https://www.youtube.com",
               "object-src 'none'",

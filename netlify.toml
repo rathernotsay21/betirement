@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  # publish directory is automatically handled by @netlify/plugin-nextjs
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -8,10 +8,8 @@
 [build.environment]
   NODE_VERSION = "20"
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# API redirects are automatically handled by @netlify/plugin-nextjs
+# No manual redirect rules needed for Next.js API routes
 
 [[headers]]
   for = "/*"
