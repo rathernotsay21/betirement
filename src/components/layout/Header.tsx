@@ -57,7 +57,7 @@ export function Header() {
   const handleMouseLeaveDropdown = () => {
     dropdownTimeoutRef.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 150); // Small delay to allow moving to submenu
+    }, 300); // Increased delay for better UX - allows time to move to submenu
   };
 
   const cancelDropdownClose = () => {
@@ -124,9 +124,9 @@ export function Header() {
                     onMouseLeave={handleMouseLeaveDropdown}
                   >
                     <button
-                      className={`py-2 text-white/90 hover:text-bitcoin-400 font-medium transition-colors duration-200 flex items-center space-x-1 ${
+                      className={`relative py-2 px-1 text-white/90 hover:text-bitcoin-400 font-medium transition-colors duration-200 flex items-center space-x-1 ${
                         item.children.some(child => isActivePath(child.href)) ? 'text-bitcoin-400' : ''
-                      }`}
+                      } ${openDropdown === item.label ? 'text-bitcoin-400' : ''}`}
                       aria-expanded={openDropdown === item.label}
                       aria-haspopup="true"
                       onKeyDown={(e) => handleKeyDown(e, true, item.label)}
@@ -150,25 +150,21 @@ export function Header() {
                       </svg>
                     </button>
 
-                    {/* Invisible bridge to prevent hover loss */}
+                    {/* Extended hover zone - always present to bridge the gap */}
                     <div
-                      className={`absolute top-full left-0 right-0 h-2 ${
-                        openDropdown === item.label ? 'block' : 'hidden'
-                      }`}
-                      onMouseEnter={cancelDropdownClose}
+                      className="absolute top-full left-0 right-0 h-3 -mt-1"
+                      aria-hidden="true"
                     />
 
                     {/* Dropdown menu with animation */}
                     <div
-                      className={`absolute top-full left-0 pt-2 transition-all duration-200 ${
+                      className={`absolute top-full left-0 mt-1 transition-all duration-200 ease-out ${
                         openDropdown === item.label
                           ? 'opacity-100 translate-y-0 pointer-events-auto'
-                          : 'opacity-0 -translate-y-1 pointer-events-none'
+                          : 'opacity-0 -translate-y-2 pointer-events-none'
                       }`}
-                      onMouseEnter={cancelDropdownClose}
-                      onMouseLeave={handleMouseLeaveDropdown}
                     >
-                      <div className="w-56 bg-white rounded-lg shadow-xl py-2 border border-neutral-200">
+                      <div className="w-56 bg-white rounded-lg shadow-xl py-2 border border-neutral-200 ring-1 ring-black/5">
                         {item.children.map((child: typeof item.children[0]) => (
                           <Link
                             key={child.href}
@@ -186,7 +182,7 @@ export function Header() {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`py-2 text-white/90 hover:text-bitcoin-400 font-medium transition-colors duration-200 ${
+                    className={`py-2 px-1 text-white/90 hover:text-bitcoin-400 font-medium transition-colors duration-200 ${
                       isActivePath(item.href) ? 'text-bitcoin-400' : ''
                     }`}
                   >
