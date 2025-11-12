@@ -1,5 +1,6 @@
 export { HeroSection } from './HeroSection';
 export { AnimatedHeroSection } from './AnimatedHeroSection';
+export { BitcoinStatisticsCard } from './BitcoinStatisticsCard';
 export { SocialProofBar } from './SocialProofBar';
 export { ValuePropositionGrid } from './ValuePropositionGrid';
 export { FeaturedContent } from './FeaturedContent';

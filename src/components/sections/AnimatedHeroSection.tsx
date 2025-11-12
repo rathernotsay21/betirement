@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/src/components/ui';
 import { useEffect, useState } from 'react';
 import { Cake, Bitcoin } from 'lucide-react';
+import { BitcoinStatisticsCard } from './BitcoinStatisticsCard';
 
 // Floating Bitcoin particles component
 function BitcoinParticles() {
@@ -103,85 +104,98 @@ export function AnimatedHeroSection() {
         style={{ y, opacity }}
         className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
       >
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Animated trust indicators */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-6 mb-8"
-          >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-bitcoin-500/30"
-            >
-              <span className="text-bitcoin-500 font-bold text-2xl">
-                .<AnimatedCounter end={21} />
-              </span>
-              <span className="text-white/80">bitcoin</span>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-success/30"
-            >
-              <Cake className="text-success w-7 h-7" />
-              <span className="text-white/80">Retire Early</span>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-bitcoin-500/30"
-            >
-              <Bitcoin className="text-bitcoin-500 w-7 h-7" />
-              <span className="text-white/80">Bitcoin Income?</span>
-            </motion.div>
-          </motion.div>
-
-          {/* Main headline with staggered animation */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h1 className="font-sans text-5xl sm:text-6xl md:text-7xl lg:text-display-xl font-black mb-6 leading-tight">
-              <motion.span
-                className="inline-block text-white"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+        <div className="max-w-7xl mx-auto">
+          {/* Main content grid: Title on left, Stats card on right (desktop) / stacked (mobile) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+            {/* Left side: Title and subtitle */}
+            <div className="text-center lg:text-left">
+              {/* Main headline with staggered animation */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
-                Engineer Your
-              </motion.span>
-              <br />
-              <motion.span
-                className="inline-block text-bitcoin-500 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                ₿etirement
-              </motion.span>
-            </h1>
-          </motion.div>
+                <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 leading-tight">
+                  <motion.span
+                    className="inline-block text-white"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
+                    Engineer Your
+                  </motion.span>
+                  <br />
+                  <motion.span
+                    className="inline-block text-bitcoin-500 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    ₿etirement
+                  </motion.span>
+                </h1>
+              </motion.div>
 
-          {/* Animated subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="text-xl sm:text-2xl md:text-3xl text-white/80 mb-12 max-w-3xl mx-auto"
-          >
-            Practical bitcoin strategies from 28 years in engineering.<br />
-            No hype. Just data and experience.
-          </motion.p>
+              {/* Animated subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1 }}
+                className="text-lg sm:text-xl md:text-2xl text-white/80 mb-8"
+              >
+                Practical bitcoin strategies from 28 years in engineering.<br />
+                No hype. Just data and experience.
+              </motion.p>
+
+              {/* Animated trust indicators */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-8"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-bitcoin-500/30"
+                >
+                  <span className="text-bitcoin-500 font-bold text-2xl">
+                    .<AnimatedCounter end={21} />
+                  </span>
+                  <span className="text-white/80">bitcoin</span>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-success/30"
+                >
+                  <Cake className="text-success w-7 h-7" />
+                  <span className="text-white/80">Retire Early</span>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-bitcoin-500/30"
+                >
+                  <Bitcoin className="text-bitcoin-500 w-7 h-7" />
+                  <span className="text-white/80">Bitcoin Income?</span>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Right side: Statistics Card */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="w-full max-w-md">
+                <BitcoinStatisticsCard />
+              </div>
+            </div>
+          </div>
 
           {/* Stats with animated counters */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="grid grid-cols-3 gap-8 mb-12 max-w-2xl mx-auto"
+            className="grid grid-cols-3 gap-8 mb-12 max-w-2xl mx-auto text-center"
           >
             <div className="text-center">
               <div className="text-3xl sm:text-4xl font-bold text-bitcoin-500">
